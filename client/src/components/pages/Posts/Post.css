@@ -1,0 +1,30 @@
+.post-section {
+  width: 600px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  margin-bottom: 50px;
+}
+
+.post-image {
+  width: 100%;
+  object-fit: fill;
+}
+
+.reaction {
+  height: 30px;
+  border-top: 1px solid #ccc;
+}
+
+.reaction i {
+  cursor: pointer;
+  font-size: 30px;
+  font-weight: bold;
+  padding-left: 20px;
+}
+
+.post-ownership {
+  font-family: Poppins;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}

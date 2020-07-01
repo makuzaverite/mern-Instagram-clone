@@ -1,0 +1,70 @@
+.edit-profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  max-width: 100%;
+  font-family: 'Poppins', sans-serif;
+}
+
+.edit-profile form {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  padding: 30px 40px;
+  height: 100%;
+}
+
+.edit-profile form h2 {
+  color: #072782;
+  text-transform: capitalize;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.edit-profile .form-control {
+  margin-bottom: 3px;
+  padding-bottom: 10px;
+  position: relative;
+}
+
+.edit-profile .form-control label {
+  display: block;
+  margin-bottom: 5px;
+}
+.edit-profile .form-control input,
+.edit-profile .form-control button,
+.edit-profile .form-control textarea {
+  border: 2px solid #f0f0f0;
+  border-radius: 4px;
+  display: block;
+  width: 450px;
+  padding: 5px;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  resize: none;
+}
+
+.edit-profile .form-control input:focus {
+  border: 1px solid #888;
+}
+
+.edit-profile form button {
+  cursor: pointer;
+  width: 100%;
+  background-color: #072782;
+  border: none;
+  padding: 10px 20px;
+  color: #fff;
+  border-radius: 5px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+.edit-btn {
+  background-color: royalblue;
+  border: none;
+  padding: 5px 10px;
+  color: #fff;
+  border-radius: 5px;
+  margin-top: 20px;
+  cursor: pointer;
+}
