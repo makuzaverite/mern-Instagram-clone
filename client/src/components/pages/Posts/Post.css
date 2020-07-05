@@ -3,6 +3,7 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
   margin-bottom: 50px;
+  padding: 2px 5px;
 }
 
 .post-image {
@@ -12,12 +13,11 @@
 
 .reaction {
   height: 30px;
-  border-top: 1px solid #ccc;
 }
 
 .reaction i {
   cursor: pointer;
-  font-size: 30px;
+  font-size: 25px;
   font-weight: bold;
   padding-left: 20px;
 }

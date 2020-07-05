@@ -9,7 +9,7 @@
 .profile {
   margin-top: 50px;
   display: grid;
-  grid-template-columns: 50% max-content;
+  grid-template-columns: 30% max-content;
   grid-column-gap: 15px;
   align-items: center;
 }

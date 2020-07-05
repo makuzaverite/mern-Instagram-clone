@@ -1,13 +1,20 @@
-import React, { createContext, useState, useEffect } from 'react'
+import React, { createContext, useEffect, useReducer } from 'react'
 import axios from 'axios'
+import { PostReducer } from '../reducers/post_reducer'
+import { post_types } from '../actions/post_types'
+
+const initialState = {
+  posts: '',
+  isLoading: true,
+}
 
 export const PostContext = createContext(null)
 
 const PostContextProvider = (props) => {
-  const [posts, setPosts] = useState([])
-  const [isLoading, setisLoading] = useState(true)
+  const [postState, postDispatch] = useReducer(PostReducer, initialState)
 
   useEffect(() => {
+    let mounted = true
     const getPost = async () => {
       try {
         const token = await localStorage.getItem('auth-token')
@@ -16,19 +23,25 @@ const PostContextProvider = (props) => {
             Authorization: token,
           },
         })
+
         if (res.data.data) {
-          setPosts(res.data.data)
-          setisLoading(false)
+          if (mounted) {
+            postDispatch({
+              type: post_types.GET_POST,
+              payload: { data: res.data.data },
+            })
+          }
         }
       } catch (error) {
         console.log(error.response)
       }
     }
     getPost()
+    return () => (mounted = false)
   }, [])
 
   return (
-    <PostContext.Provider value={{ posts, setPosts, isLoading, setisLoading }}>
+    <PostContext.Provider value={{ postState, postDispatch }}>
       {props.children}
     </PostContext.Provider>
   )

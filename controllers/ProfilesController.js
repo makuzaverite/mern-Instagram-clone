@@ -4,8 +4,6 @@ const Profile = require('../models/profileModel')
 const path = require('path')
 
 exports.createprofile = asyncHandler(async (req, res, next) => {
-  console.log(1)
-
   const user = req.user._id
 
   if (!user)
@@ -27,7 +25,6 @@ exports.createprofile = asyncHandler(async (req, res, next) => {
       bio,
       gender,
     }
-    console.log(fieldsToupdate)
     const updatedProfile = await Profile.findByIdAndDelete(
       req.user.id,
       fieldsToupdate,
@@ -78,8 +75,6 @@ exports.updateProfile = asyncHandler(async (req, res) => {
   if (!checkProfile) {
     return next(new ErrorResponse('No profile found', 400))
   }
-
-  console.log(checkProfile)
 
   const fieldsToupdate = {
     user: req.user.id,
@@ -175,7 +170,6 @@ exports.updateProfilePicture = asyncHandler(async (req, res, next) => {
 
   file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async (err) => {
     if (err) {
-      console.log(err)
       return next(
         new ErrorResponse(`Problem occured while uploading file`, 500)
       )

@@ -5,21 +5,18 @@ import { AuthContext } from '../../context/AuthContext'
 import Avatar from '../pages/avatar.png'
 import HomeIcon from './home-icon.webp'
 import NewPost from './newpost.webp'
+import { auth_actions } from '../../actions/action_types'
 
 export default function NavBar() {
-  const { userData, setUserData } = useContext(AuthContext)
+  const { state, dispatch } = useContext(AuthContext)
   const history = useHistory()
   const logout = () => {
-    setUserData({
-      token: undefined,
-      user: undefined,
-      isAuthenticated: false,
-    })
     localStorage.setItem('auth-token', '')
+    dispatch({ type: auth_actions.LOGOUT })
     history.push('/login')
   }
 
-  if (userData.isLoading) {
+  if (state.isLoading) {
     return null
   } else {
     return (
@@ -27,17 +24,8 @@ export default function NavBar() {
         <span>
           <Link to="/">iDrip</Link>
         </span>
-        {userData.user ? (
+        {state.user ? (
           <ul>
-            {/* <li>
-              <Link to="/">
-                <i
-                  className="fa fa-plus-square-o fa-2x"
-                  style={{ position: 'relative', left: '5px', top: '10px' }}
-                ></i>
-              </Link>
-            </li> */}
-
             <li>
               <Link to="/">
                 <img
@@ -45,7 +33,6 @@ export default function NavBar() {
                   alt="Avatar"
                   align="center"
                   tooltip="profile"
-                  // width="100px"
                   height="100px"
                 />
               </Link>

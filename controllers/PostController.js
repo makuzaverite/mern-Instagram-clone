@@ -49,7 +49,6 @@ exports.createpost = asyncHandler(async (req, res, next) => {
 
   file.mv(`${process.env.POST_FILE_PATH}/${file.name}`, async (err) => {
     if (err) {
-      console.log(err)
       return next(
         new ErrorResponse(`Problem occured while uploading file`, 500)
       )
@@ -213,10 +212,7 @@ exports.deleteComment = asyncHandler(async (req, res, next) => {
   if (checkPostavailable.comments[editIndex].user === req.user.id) {
     new ErrorResponse('You cant delete a post you dont own', 400)
   }
-  // console.log(
-  //   checkPostavailable.comments[editIndex]._id.toString() ===
-  //     req.params.commentId
-  // )
+
   let remmainingComment = checkPostavailable.comments.filter(
     (comment) => comment._id.toString() !== req.params.commentId
   )

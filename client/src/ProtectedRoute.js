@@ -4,14 +4,14 @@ import { AuthContext } from './context/AuthContext'
 import Spinner from './components/layout/Spinner'
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
-  const { userData } = useContext(AuthContext)
+  const { state } = useContext(AuthContext)
   return (
     <Route
       {...rest}
       render={(props) =>
-        userData.isLoading ? (
+        state.isLoading ? (
           <Spinner />
-        ) : userData.isAuthenticated ? (
+        ) : state.isAuthenticated ? (
           <Component {...props} />
         ) : (
           <Redirect to="/login" />

@@ -3,20 +3,21 @@ import './Post.css'
 import Post from './Post'
 import Spinner from '../../layout/Spinner'
 import { PostContext } from '../../../context/PostContext'
+import { AuthContext } from '../../../context/AuthContext'
 
 function Posts() {
-  const { posts, isLoading } = useContext(PostContext)
+  const { postState } = useContext(PostContext)
+  const { state } = useContext(AuthContext)
 
-  return isLoading ? (
+  return state.isLoading ? (
     <Spinner />
   ) : (
     <section className="posts-section">
-      {/* <div>
-        <NewPost />
-      </div> */}
       <div>
-        {posts.length !== 0 ? (
-          posts.map((post) => <Post key={`${post._id}`} post={post} />)
+        {postState.posts.length !== 0 ? (
+          postState.posts.map((post) => (
+            <Post key={`${post._id}`} post={post} creator={state.user._id} />
+          ))
         ) : (
           <p
             style={{

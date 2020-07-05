@@ -68,3 +68,7 @@
   margin-top: 20px;
   cursor: pointer;
 }
+
+.form-radio-group label {
+  display: block;
+}

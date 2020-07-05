@@ -4,6 +4,7 @@ import { AuthContext } from '../../context/AuthContext'
 import AuthError from '../error/authError'
 import { useHistory, Link } from 'react-router-dom'
 import axios from 'axios'
+import { auth_actions } from '../../actions/action_types'
 
 function Register() {
   const [fname, setFname] = useState('')
@@ -14,7 +15,7 @@ function Register() {
   const [error, setError] = useState('')
   const [isLoading, setisLoading] = useState(false)
 
-  const { setUserData } = useContext(AuthContext)
+  const { dispatch } = useContext(AuthContext)
   const history = useHistory()
 
   const onHandleSubmit = async (e) => {
@@ -83,19 +84,18 @@ function Register() {
       )
 
       if (getMe.data.sucess) {
-        setUserData({
-          token: `Bearer ${token}`,
-          user: getMe.data.data,
-          isAuthenticated: true,
+        dispatch({
+          type: auth_actions.LOGIN_SUCCESS,
+          payload: { data: getMe.data.data, token: `Bearer ${token}` },
         })
+
         history.push('/')
       }
     } catch (error) {
       if (error.response.data.error === 'Duplicate field value entered') {
-        setError('Email arledy exists')
+        setError('Email arleady exists')
         setisLoading(false)
       }
-      console.log(error.response)
     }
   }
 

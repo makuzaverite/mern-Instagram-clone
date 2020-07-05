@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import './NewPost.css'
 import Progress from './Progress'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import Message from './Message'
+import { post_types } from '../../../../actions/post_types'
+import { PostContext } from '../../../../context/PostContext'
 
 function NewPost() {
+  const { postDispatch } = useContext(PostContext)
   const [file, setFile] = useState('')
   const [message, setMessage] = useState('')
   const [uploadPercentage, setuploadPercentage] = useState(0)
@@ -36,11 +39,17 @@ function NewPost() {
           setTimeout(() => setuploadPercentage(0), 10000)
         },
       })
-      if (res.data.data) setMessage('Post added successfully')
+      setMessage('Post added successfully')
+      if (res.data.data) {
+        postDispatch({
+          type: post_types.ADD_POST,
+          payload: res.data.data,
+        })
+      }
       history.push('/')
     } catch (error) {
       if (error.message.status === 5000) console.log('Some thing went wrong')
-      setMessage(error.response.data.error)
+      console.log(error.response)
     }
   }
 

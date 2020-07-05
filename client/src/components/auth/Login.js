@@ -4,14 +4,15 @@ import { AuthContext } from '../../context/AuthContext'
 import { useHistory, Link } from 'react-router-dom'
 import AuthError from '../error/authError'
 import axios from 'axios'
+import { auth_actions } from '../../actions/action_types'
 
 function Login() {
+  const { dispatch } = useContext(AuthContext)
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
   const [error, setError] = useState()
   const [loadig, setloading] = useState(false)
 
-  const { setUserData } = useContext(AuthContext)
   const history = useHistory()
 
   const handleLogin = async (e) => {
@@ -34,10 +35,10 @@ function Login() {
           Authorization: `Bearer ${token}`,
         },
       })
-      setUserData({
-        token: token,
-        user: getMe.data,
-        isAuthenticated: true,
+
+      dispatch({
+        type: auth_actions.LOGIN_SUCCESS,
+        payload: { data: getMe.data, token },
       })
 
       history.push('/')

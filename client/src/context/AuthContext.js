@@ -1,15 +1,19 @@
-import React, { createContext, useState, useEffect } from 'react'
+import React, { createContext, useReducer, useEffect } from 'react'
 import axios from 'axios'
+import { AuthReducer } from '../reducers/auth_reducer'
+import { auth_actions } from '../actions/action_types'
+
+const initialState = {
+  token: '',
+  user: '',
+  isAuthenticated: false,
+  isLoading: true,
+}
 
 export const AuthContext = createContext()
 
 const AuthcontextProvider = (props) => {
-  const [userData, setUserData] = useState({
-    token: '',
-    user: '',
-    isAuthenticated: false,
-    isLoading: true,
-  })
+  const [state, dispatch] = useReducer(AuthReducer, initialState)
 
   useEffect(() => {
     const checkLoggedIn = async () => {
@@ -27,42 +31,21 @@ const AuthcontextProvider = (props) => {
 
         if (checkToken.data) {
           const { data } = checkToken.data
-          setUserData({
-            token: token,
-            user: data,
-            isAuthenticated: true,
-            isLoading: false,
-          })
-        }
-
-        if (!checkToken.data) {
-          setUserData({
-            token: token,
-            user: '',
-            isAuthenticated: false,
-            isLoading: false,
+          dispatch({
+            type: auth_actions.LOGIN_SUCCESS,
+            payload: { data, token },
           })
         }
       } catch (error) {
-        setUserData({
-          token: '',
-          user: '',
-          isAuthenticated: false,
-          isLoading: false,
-        })
+        dispatch({ type: auth_actions.LOGIN_FAILURE })
       }
     }
 
     checkLoggedIn()
   }, [])
 
-  // const isLoggedIn = () => {
-  //   if (userData.token && userData.user) return true
-  //   return false
-  // }
-
   return (
-    <AuthContext.Provider value={{ userData, setUserData }}>
+    <AuthContext.Provider value={{ state, dispatch }}>
       {props.children}
     </AuthContext.Provider>
   )
