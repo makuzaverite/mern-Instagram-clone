@@ -29,7 +29,7 @@
 
 #### Create a file called .env inside config folder
 
-> Assign values to the corresponding values inside the .env file for all of your environment variables
+> Assign values to the corresponding variables inside the .env file for all of your environment variables for the app to work
 
 ```git
    .env
