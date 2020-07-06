@@ -1,0 +1,52 @@
+.post__card {
+  width: 500px;
+  margin: 10px auto;
+  font-family: Poppins;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  padding: 10px;
+}
+
+.comment__card {
+  width: 500px;
+  margin: 0 auto;
+  font-family: Poppins;
+}
+
+.comment__card form input,
+textarea {
+  width: 100%;
+  padding: 6px;
+  margin-bottom: 10px;
+  outline: none;
+}
+
+.comment__card input {
+  background-color: #04206e;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.comment__card textarea {
+  height: 100px;
+  resize: none;
+  font-family: Poppins;
+}
+
+.comment__msg {
+  display: flex;
+  background-color: #f1efef;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  padding: 10px;
+  border-radius: 2px;
+}
+
+.post__info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.post__card img {
+  width: 100%;
+}

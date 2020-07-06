@@ -5,6 +5,8 @@ import AuthError from '../error/authError'
 import { useHistory, Link } from 'react-router-dom'
 import axios from 'axios'
 import { auth_actions } from '../../actions/action_types'
+// import { ProfileContext } from '../../context/ProfileContext'
+// import { profile_types } from '../../actions/profile_types'
 
 function Register() {
   const [fname, setFname] = useState('')
@@ -16,6 +18,7 @@ function Register() {
   const [isLoading, setisLoading] = useState(false)
 
   const { dispatch } = useContext(AuthContext)
+  // const { postDispatch } = useContext(ProfileContext)
   const history = useHistory()
 
   const onHandleSubmit = async (e) => {

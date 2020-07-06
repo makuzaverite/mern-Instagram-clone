@@ -7,6 +7,7 @@ const {
   follow,
   unfollow,
   updateProfilePicture,
+  findProfile,
 } = require('../controllers/ProfilesController')
 const router = express.Router({ mergeParams: true })
 
@@ -14,6 +15,7 @@ const { protect } = require('../middleware/auth')
 
 router.get('/', getProfiles)
 router.get('/me', protect, getProfile)
+router.get('/:id', findProfile)
 router.post('/', protect, createprofile)
 router.put('/:id', protect, updateProfile)
 router.put('/photo/:id', protect, updateProfilePicture)

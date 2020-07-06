@@ -17,22 +17,40 @@ const Profile = () => {
   ) : (
     <div className="profile-page">
       <section className="profile">
-        <div className="profile-avatar">
+        <div className="profile-avatar" style={{ margin: 'auto' }}>
           <img src={Avatar} alt="avatar" align="center" />
         </div>
         <div className="profile-details">
-          {state.username ? <p>username: {state.username}</p> : null}
+          {state.username ? (
+            <p>
+              username:{' '}
+              <span style={{ fontWeight: 'bold' }}>{state.username}</span>
+            </p>
+          ) : null}
 
-          {state.bio ? <p>Bio: {state.bio}</p> : null}
+          {state.bio ? (
+            <p>
+              Bio: <span style={{ fontWeight: 'bold' }}>{state.bio}</span>{' '}
+            </p>
+          ) : null}
 
-          {state.gender ? <p>Gender: {state.gender}</p> : null}
+          {state.gender ? (
+            <p>
+              Gender: <span style={{ fontWeight: 'bold' }}>{state.gender}</span>
+            </p>
+          ) : null}
           {state.website ? (
             <p>
               Website: <a href={state.website}>{state.website} </a>
             </p>
           ) : null}
 
-          {state.location ? <p>Location: {state.location}</p> : null}
+          {state.location ? (
+            <p>
+              Location:{' '}
+              <span style={{ fontWeight: 'bold' }}>{state.location}</span>
+            </p>
+          ) : null}
 
           <button onClick={handleEdit} className="edit-btn">
             Edit Profile

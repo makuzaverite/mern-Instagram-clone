@@ -10,8 +10,10 @@ import ProfileContextProvider from './context/ProfileContext'
 import EditProfile from './components/pages/Profile/EditProfile'
 import Profile from './components/pages/Profile/Profile'
 import ProtectedRoute from './ProtectedRoute'
-import Post from './components/pages/Posts/Posts'
+import Posts from './components/pages/Posts/Posts'
 import NewPost from './components/pages/Posts/NewPost/NewPost'
+import Profiles from './components/pages/Profile/Profiles/Profiles'
+import Post from './components/pages/Posts/Post/Post'
 
 function App() {
   return (
@@ -22,7 +24,6 @@ function App() {
             <PostContextProvider>
               <NavBar />
               <Switch>
-                {/* <Route exact path="/" component={Home} /> */}
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/login" component={Login} />
                 <ProtectedRoute exact path="/" component={Home} />
@@ -32,8 +33,14 @@ function App() {
                   path="/profile/edit"
                   component={EditProfile}
                 />
-                <ProtectedRoute exact path="/posts" component={Post} />
+                <ProtectedRoute exact path="/posts" component={Posts} />
                 <ProtectedRoute exact path="/newPost" component={NewPost} />
+                <ProtectedRoute
+                  exact
+                  path="/profile/:id"
+                  component={Profiles}
+                />
+                <ProtectedRoute exact path="/post/:id" component={Post} />
               </Switch>
             </PostContextProvider>
           </ProfileContextProvider>
@@ -42,5 +49,4 @@ function App() {
     </>
   )
 }
-
 export default App

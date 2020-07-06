@@ -5,6 +5,7 @@ const Profile = require('../models/profileModel')
 const router = require('../routers/post')
 const { post } = require('../routers/post')
 const path = require('path')
+const mongoose = require('mongoose')
 
 //get posts
 exports.getPosts = asyncHandler(async (req, res, next) => {
@@ -102,15 +103,20 @@ exports.likePost = asyncHandler(async (req, res, next) => {
 exports.unlikePost = asyncHandler(async (req, res, next) => {
   const checkPostavailable = await Post.findById(req.params.id)
 
-  if (!checkPostavailable) {
+  // console.log(checkPostavailable.user.toString() === req.user._id.toString())
+
+  // if (checkPostavailable.user.toString() !== req.user._id.toString())
+  //   return next(new ErrorResponse('Not allowed to perform this', 400))
+
+  if (!checkPostavailable)
     return next(new ErrorResponse('Post doesnot exists', 400))
-  }
 
   if (
     checkPostavailable.likes.filter(
       (like) => like.user.toString() === req.user.id
     ).length === 0
   ) {
+    console.log(1)
     return next(new ErrorResponse('You have not liked this post', 400))
   }
 
@@ -120,9 +126,7 @@ exports.unlikePost = asyncHandler(async (req, res, next) => {
     .indexOf(req.user.id)
 
   checkPostavailable.likes.splice(removeIndex, 1)
-
   await checkPostavailable.save()
-
   res.status(200).json({ success: true, data: checkPostavailable })
 })
 

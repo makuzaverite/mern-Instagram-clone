@@ -39,8 +39,8 @@ function NewPost() {
           setTimeout(() => setuploadPercentage(0), 10000)
         },
       })
-      setMessage('Post added successfully')
       if (res.data.data) {
+        setMessage('Post added successfully')
         postDispatch({
           type: post_types.ADD_POST,
           payload: res.data.data,

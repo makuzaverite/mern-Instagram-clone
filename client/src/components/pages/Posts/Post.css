@@ -17,14 +17,20 @@
 
 .reaction i {
   cursor: pointer;
-  font-size: 25px;
-  font-weight: bold;
+  font-size: 20px;
+  font-weight: normal;
   padding-left: 20px;
+  color: #000;
 }
 
 .post-ownership {
   font-family: Poppins;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 5px;
+}
+.userPhoto {
+  width: 40px;
+  height: 40px;
 }

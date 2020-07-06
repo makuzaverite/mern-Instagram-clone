@@ -69,6 +69,17 @@ exports.getProfile = asyncHandler(async (req, res) => {
   res.status(200).json({ success: true, data: profile })
 })
 
+exports.findProfile = asyncHandler(async (req, res, next) => {
+  const { id } = req.params
+
+  if (!id) return next(new ErrorResponse('No id passed', 400))
+
+  const profile = await Profile.findOne({ username: id })
+
+  if (!profile) return next(new ErrorResponse('NOT FOUND', 400))
+  res.status(200).json({ success: true, data: profile })
+})
+
 exports.updateProfile = asyncHandler(async (req, res) => {
   const checkProfile = await Profile.findById(req.params.id)
 
