@@ -18,7 +18,6 @@ function Register() {
   const [isLoading, setisLoading] = useState(false)
 
   const { dispatch } = useContext(AuthContext)
-  // const { postDispatch } = useContext(ProfileContext)
   const history = useHistory()
 
   const onHandleSubmit = async (e) => {
@@ -105,7 +104,7 @@ function Register() {
   return (
     <div className="register">
       <form onSubmit={onHandleSubmit}>
-        <h2>Create a new account</h2>
+        <h2>iDrip Create a new account</h2>
         {error !== undefined ? <AuthError error={error} /> : null}
         <div className="form-control">
           <label>Firstname </label>

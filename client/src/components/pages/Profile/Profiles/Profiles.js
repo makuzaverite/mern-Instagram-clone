@@ -17,14 +17,14 @@ export default function Profiles({ match }) {
         console.log(error.response.data)
       }
     }
-
     logProfile()
-  }, [])
+  }, [match.params.id])
+
   return !profile ? (
     <Spinner />
   ) : (
     <div className="profiler__card">
-      <img src={Avatar} alt="profile-photo" />{' '}
+      <img src={Avatar} alt="profile" />{' '}
       {profile.username ? (
         <p>
           Username:{' '}
@@ -43,7 +43,10 @@ export default function Profiles({ match }) {
       ) : null}
       {profile.website ? (
         <p>
-          Website: <Link style={{ fontWeight: 'bold' }}>{profile.website}</Link>{' '}
+          Website:{' '}
+          <Link style={{ fontWeight: 'bold' }} to={profile.website}>
+            {profile.website}
+          </Link>{' '}
         </p>
       ) : null}
       {profile.location ? (

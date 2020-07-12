@@ -51,7 +51,7 @@ function Login() {
   return (
     <div className="login">
       <form onSubmit={handleLogin}>
-        <h2>Log into your account</h2>
+        <h2>iDrip Log into your account</h2>
         {error !== undefined ? <AuthError error={error} /> : null}
         <div className="form-control">
           <label>Email </label>

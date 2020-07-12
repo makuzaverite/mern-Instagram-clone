@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState, useContext, useCallback } from 'react'
 import axios from 'axios'
 import './Post.css'
 import Spinner from '../../../../components/layout/Spinner'
@@ -14,12 +14,14 @@ export default function Post({ match }) {
   const id = match.params.id
   const token = localStorage.getItem('auth-token')
 
+  const postChange = useCallback(postDispatch, [postState])
+
   useEffect(() => {
-    const getPost = async (id) => {
+    const getPost = async () => {
       try {
         const res = await axios.get(`/api/post/${id}`)
         setPost(res.data.data)
-        postDispatch({
+        postChange({
           type: post_types.GET_SINGLE_POST,
           payload: res.data.data,
         })
@@ -27,8 +29,8 @@ export default function Post({ match }) {
         console.log(error)
       }
     }
-    getPost(id)
-  }, [])
+    getPost()
+  }, [id, postChange])
 
   const handleComment = async (e) => {
     e.preventDefault()

@@ -58,7 +58,6 @@ function NewPost() {
       <form onSubmit={onSubmit} className="newPost">
         {message ? <Message message={message} /> : null}
         <p>Upload a photo for new post</p>
-        {/* <input type="file"  accept="image/*" /> */}
         <Progress percentage={uploadPercentage} />
         <input type="file" onChange={onChange} className="fileupload" />
         <input type="submit" value="new post" className="submitBtn" />

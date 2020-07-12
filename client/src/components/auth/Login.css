@@ -14,7 +14,6 @@
 
 .login form h2 {
   color: #072782;
-  text-transform: capitalize;
   margin-bottom: 20px;
   text-align: center;
 }
@@ -53,6 +52,6 @@
   padding: 10px 20px;
   color: #fff;
   border-radius: 5px;
-  margin-top:20px;
+  margin-top: 20px;
   cursor: pointer;
 }

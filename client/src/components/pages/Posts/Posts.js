@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useCallback } from 'react'
 import './Post.css'
 import Post from './PostItem'
 import Spinner from '../../layout/Spinner'
@@ -10,6 +10,8 @@ import { post_types } from '../../../actions/post_types'
 function Posts() {
   const { postState, postDispatch } = useContext(PostContext)
   const { state } = useContext(AuthContext)
+
+  const ChangePost = useCallback(postDispatch, [])
 
   useEffect(() => {
     let mounted = true
@@ -24,7 +26,7 @@ function Posts() {
 
         if (res.data.data) {
           if (mounted) {
-            postDispatch({
+            ChangePost({
               type: post_types.GET_POST,
               payload: { data: res.data.data },
             })
@@ -36,7 +38,7 @@ function Posts() {
     }
     getPost()
     return () => (mounted = false)
-  }, [])
+  }, [ChangePost])
 
   return postState.isLoading ? (
     <Spinner />
