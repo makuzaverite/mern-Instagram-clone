@@ -1,18 +1,46 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useCallback } from 'react'
 import Avatar from './avatar.png'
+import axios from 'axios'
 import './Profile.css'
 import { ProfileContext } from '../../../context/ProfileContext'
 import Spinner from '../../layout/Spinner'
 import { useHistory } from 'react-router-dom'
+import { profile_types } from '../../../actions/profile_types'
 
 const Profile = () => {
-  const { state } = useContext(ProfileContext)
+  const { profileState, profileDispatch } = useContext(ProfileContext)
+
+  const changeProfile = useCallback(profileDispatch, [profileState])
+
+  useEffect(() => {
+    const currentLoggedIn = async () => {
+      const token = await localStorage.getItem('auth-token')
+      try {
+        const prof = await axios.get(`/api/profile/me`, {
+          headers: {
+            Authorization: token,
+          },
+        })
+
+        if (prof.data.data) {
+          changeProfile({
+            type: profile_types.SET_PROFILE,
+            payload: prof.data.data,
+          })
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    currentLoggedIn()
+  }, [changeProfile])
 
   const history = useHistory()
 
   const handleEdit = () => history.push('/profile/edit')
 
-  return Object.keys(state).length === 0 && state.constructor === Object ? (
+  return Object.keys(profileState).length === 0 &&
+    profileState.constructor === Object ? (
     <Spinner />
   ) : (
     <div className="profile-page">
@@ -21,34 +49,41 @@ const Profile = () => {
           <img src={Avatar} alt="avatar" align="center" />
         </div>
         <div className="profile-details">
-          {state.username ? (
+          {profileState.username ? (
             <p>
               username:{' '}
-              <span style={{ fontWeight: 'bold' }}>{state.username}</span>
+              <span style={{ fontWeight: 'bold' }}>
+                {profileState.username}
+              </span>
             </p>
           ) : null}
 
-          {state.bio ? (
+          {profileState.bio ? (
             <p>
-              Bio: <span style={{ fontWeight: 'bold' }}>{state.bio}</span>{' '}
+              Bio:{' '}
+              <span style={{ fontWeight: 'bold' }}>{profileState.bio}</span>{' '}
             </p>
           ) : null}
 
-          {state.gender ? (
+          {profileState.gender ? (
             <p>
-              Gender: <span style={{ fontWeight: 'bold' }}>{state.gender}</span>
+              Gender:{' '}
+              <span style={{ fontWeight: 'bold' }}>{profileState.gender}</span>
             </p>
           ) : null}
-          {state.website ? (
+          {profileState.website ? (
             <p>
-              Website: <a href={state.website}>{state.website} </a>
+              Website:{' '}
+              <a href={profileState.website}>{profileState.website} </a>
             </p>
           ) : null}
 
-          {state.location ? (
+          {profileState.location ? (
             <p>
               Location:{' '}
-              <span style={{ fontWeight: 'bold' }}>{state.location}</span>
+              <span style={{ fontWeight: 'bold' }}>
+                {profileState.location}
+              </span>
             </p>
           ) : null}
 

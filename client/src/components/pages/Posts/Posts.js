@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useCallback } from 'react'
+import React, { useContext, useState, useCallback, useEffect } from 'react'
 import './Post.css'
 import Post from './PostItem'
 import Spinner from '../../layout/Spinner'
@@ -9,25 +9,29 @@ import { post_types } from '../../../actions/post_types'
 
 function Posts() {
   const { postState, postDispatch } = useContext(PostContext)
+
   const { state } = useContext(AuthContext)
 
-  const ChangePost = useCallback(postDispatch, [])
+  const ChangePost = useCallback(postDispatch, [postState])
+  const [isLoading, setisLoading] = useState(false)
 
   useEffect(() => {
     let mounted = true
     const getPost = async () => {
       try {
+        setisLoading(true)
         const token = await localStorage.getItem('auth-token')
         const res = await axios.get('/api/post', {
           headers: {
             Authorization: token,
           },
         })
+        setisLoading(false)
 
         if (res.data.data) {
           if (mounted) {
             ChangePost({
-              type: post_types.GET_POST,
+              type: post_types.SET_POST,
               payload: { data: res.data.data },
             })
           }
@@ -46,9 +50,13 @@ function Posts() {
     <section className="posts-section">
       <div>
         {postState.posts.length > 0 ? (
-          postState.posts.map((post) => (
-            <Post key={`${post._id}`} post={post} creator={state.user._id} />
-          ))
+          postState.posts.map((post) =>
+            !isLoading ? (
+              <Post key={`${post._id}`} post={post} creator={state.user._id} />
+            ) : (
+              <Spinner key={`${Math.floor(Math.random() * 100)}`} />
+            )
+          )
         ) : (
           <p
             style={{

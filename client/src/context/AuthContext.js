@@ -16,6 +16,7 @@ const AuthcontextProvider = (props) => {
   const [state, dispatch] = useReducer(AuthReducer, initialState)
 
   useEffect(() => {
+    let mounted = true
     const checkLoggedIn = async () => {
       try {
         let token = await localStorage.getItem('auth-token')
@@ -31,10 +32,12 @@ const AuthcontextProvider = (props) => {
 
         if (checkToken.data) {
           const { data } = checkToken.data
-          dispatch({
-            type: auth_actions.LOGIN_SUCCESS,
-            payload: { data, token },
-          })
+          if (mounted) {
+            dispatch({
+              type: auth_actions.LOGIN_SUCCESS,
+              payload: { data, token },
+            })
+          }
         }
       } catch (error) {
         dispatch({ type: auth_actions.LOGIN_FAILURE })
@@ -42,6 +45,7 @@ const AuthcontextProvider = (props) => {
     }
 
     checkLoggedIn()
+    return () => (mounted = false)
   }, [])
 
   return (

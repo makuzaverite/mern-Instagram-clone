@@ -2,7 +2,7 @@ import { post_types } from '../actions/post_types'
 
 export const PostReducer = (state, action) => {
   switch (action.type) {
-    case post_types.GET_POST:
+    case post_types.SET_POST:
       return {
         posts: action.payload.data,
         isLoading: false,

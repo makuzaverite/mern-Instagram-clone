@@ -1,7 +1,7 @@
 export const post_types = {
   ADD_POST: 'ADD_POST',
   EDIT_POST: 'EDIT_POST',
-  GET_POST: 'GET_POST',
+  SET_POST: 'SET_POST',
   DELETE_POST: 'DELETE_POST',
   ADD_LIKE: 'ADD_LIKE',
   UN_LIKE: 'UN_LIKE',

@@ -27,7 +27,7 @@ const PostContextProvider = (props) => {
         if (res.data.data) {
           if (mounted) {
             postDispatch({
-              type: post_types.GET_POST,
+              type: post_types.SET_POST,
               payload: { data: res.data.data },
             })
           }

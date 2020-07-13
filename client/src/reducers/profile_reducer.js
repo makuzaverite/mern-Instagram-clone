@@ -2,7 +2,7 @@ import { profile_types } from '../actions/profile_types'
 
 export const ProfileReducer = (state, action) => {
   switch (action.type) {
-    case profile_types.GET_PROFILE:
+    case profile_types.SET_PROFILE:
       return {
         followers: action.payload.followers,
         gender: action.payload.gender,
@@ -27,6 +27,8 @@ export const ProfileReducer = (state, action) => {
         user: action.payload.user,
         id: action.payload._id,
       }
+    case profile_types.LOGOUT:
+      return {}
     default:
       return state
   }

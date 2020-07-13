@@ -8,14 +8,14 @@ import { profile_types } from '../../../actions/profile_types'
 
 function EditProfile() {
   const history = useHistory()
-  const { state, dispatch } = useContext(ProfileContext)
+  const { profileState, profileDispatch } = useContext(ProfileContext)
 
   const website = createRef()
   const bio = createRef()
   const location = createRef()
   const username = createRef()
   const token = localStorage.getItem('auth-token')
-  const [gender, setGender] = useState(state.gender)
+  const [gender, setGender] = useState(profileState.gender)
 
   const handleEdit = async (e) => {
     e.preventDefault()
@@ -29,22 +29,25 @@ function EditProfile() {
     }
 
     try {
-      const res = await axios.put(`/api/profile/${state.id}`, profile, {
+      const res = await axios.put(`/api/profile/${profileState.id}`, profile, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: token,
         },
       })
 
-      dispatch({ type: profile_types.EDIT_PROFILE, payload: res.data.data })
-
+      profileDispatch({
+        type: profile_types.EDIT_PROFILE,
+        payload: res.data.data,
+      })
       history.push('/profile')
     } catch (error) {
       console.log(error.response.message)
     }
   }
 
-  return Object.keys(state).length === 0 && state.constructor === Object ? (
+  return Object.keys(profileState).length === 0 &&
+    profileState.constructor === Object ? (
     <Spinner />
   ) : (
     <div className="edit-profile">
@@ -52,7 +55,7 @@ function EditProfile() {
         <div className="form-control">
           <label htmlFor="username">Username</label>
           <input
-            defaultValue={state.username}
+            defaultValue={profileState.username}
             type="text"
             id="username"
             ref={username}
@@ -63,7 +66,7 @@ function EditProfile() {
         <div className="form-control">
           <label htmlFor="bio">Biography</label>
           <textarea
-            defaultValue={state.bio}
+            defaultValue={profileState.bio}
             id="bio"
             ref={bio}
             placeholder="Bio"
@@ -73,7 +76,7 @@ function EditProfile() {
         <div className="form-radio-group">
           <label htmlFor="gender">Gender</label>
           <input
-            defaultChecked={state.gender === 'Male'}
+            defaultChecked={profileState.gender === 'Male'}
             type="radio"
             id="gender"
             name="gender"
@@ -83,7 +86,7 @@ function EditProfile() {
           {'   '}
           Male <br />
           <input
-            defaultChecked={state.gender === 'Female'}
+            defaultChecked={profileState.gender === 'Female'}
             type="radio"
             id="gender"
             value="Female"
@@ -96,7 +99,7 @@ function EditProfile() {
         <div className="form-control">
           <label htmlFor="website">Website</label>
           <input
-            defaultValue={state.website}
+            defaultValue={profileState.website}
             type="url"
             id="website"
             ref={website}
@@ -106,7 +109,7 @@ function EditProfile() {
         <div className="form-control">
           <label htmlFor="location">Location</label>
           <input
-            defaultValue={state.location}
+            defaultValue={profileState.location}
             type="text"
             id="location"
             ref={location}

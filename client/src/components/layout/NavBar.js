@@ -2,17 +2,21 @@ import React, { useContext } from 'react'
 import './NavBar.css'
 import { Link, useHistory } from 'react-router-dom'
 import { AuthContext } from '../../context/AuthContext'
+import { ProfileContext } from '../../context/ProfileContext'
 import Avatar from '../pages/avatar.png'
 import HomeIcon from './home-icon.webp'
 import NewPost from './newpost.webp'
 import { auth_actions } from '../../actions/action_types'
+import { profile_types } from '../../actions/profile_types'
 
 export default function NavBar() {
   const { state, dispatch } = useContext(AuthContext)
+  const { profileDispatch } = useContext(ProfileContext)
   const history = useHistory()
   const logout = () => {
     localStorage.setItem('auth-token', '')
     dispatch({ type: auth_actions.LOGOUT })
+    profileDispatch({ type: profile_types.LOGOUT })
     history.push('/login')
   }
 

@@ -11,6 +11,7 @@ export default function Post({ match }) {
   const { state } = useContext(AuthContext)
   const [post, setPost] = useState('')
   const [comment, setComment] = useState('')
+  const [isLoading, setLoading] = useState(true)
   const id = match.params.id
   const token = localStorage.getItem('auth-token')
 
@@ -25,6 +26,7 @@ export default function Post({ match }) {
           type: post_types.GET_SINGLE_POST,
           payload: res.data.data,
         })
+        setLoading(false)
       } catch (error) {
         console.log(error)
       }
@@ -71,7 +73,7 @@ export default function Post({ match }) {
       postDispatch({ type: post_types.DELETE_COMMENT, payload: res.data.data })
   }
 
-  return postState.postPhoto ? (
+  return isLoading ? (
     <Spinner />
   ) : (
     <>
