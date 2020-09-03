@@ -1,20 +1,59 @@
 .profile-page {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-family: Poppins;
+	width: 1000px;
+	margin: 1rem auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	font-family: Poppins;
+}
+.profiler__card {
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-gap: 50px;
+	max-width: 100%;
+	padding: 20px 10px;
+	font-family: Poppins;
+}
+.follow {
+	display: flex;
+	margin-bottom: 20px;
 }
 
-.profile {
-  margin-top: 50px;
-  display: grid;
-  grid-template-rows: 30% 70%;
-  grid-row-gap: 15px;
-  align-items: center;
+.profile_avatar img {
+	width: 150px;
 }
 
-.profile img {
-  width: 100px;
-  height: 100px;
+.follow > * {
+	margin-right: 2rem;
+}
+.posts_summary {
+	display: flex;
+}
+.posts_summary > * {
+	margin-right: 2rem;
+}
+
+.follow_btn,
+.more_btn {
+	background-color: #3896ef;
+	color: #fff;
+	padding: 10px 50px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	outline: none;
+}
+.more_btn {
+	padding: 10px 5px;
+}
+
+.fullinfo {
+	margin-top: 10px;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
+.fullinfo h3 {
+	margin-right: 1rem;
 }

@@ -16,37 +16,33 @@ import Profiles from './components/pages/Profile/Profiles/Profiles'
 import Post from './components/pages/Posts/Post/Post'
 
 function App() {
-  return (
-    <>
-      <BrowserRouter>
-        <AuthcontextProvider>
-          <ProfileContextProvider>
-            <PostContextProvider>
-              <NavBar />
-              <Switch>
-                <Route exact path="/register" component={Register} />
-                <Route exact path="/login" component={Login} />
-                <ProtectedRoute exact path="/" component={Home} />
-                <ProtectedRoute exact path="/profile" component={Profile} />
-                <ProtectedRoute
-                  exact
-                  path="/profile/edit"
-                  component={EditProfile}
-                />
-                <ProtectedRoute exact path="/posts" component={Posts} />
-                <ProtectedRoute exact path="/newPost" component={NewPost} />
-                <ProtectedRoute
-                  exact
-                  path="/profile/:id"
-                  component={Profiles}
-                />
-                <ProtectedRoute exact path="/post/:id" component={Post} />
-              </Switch>
-            </PostContextProvider>
-          </ProfileContextProvider>
-        </AuthcontextProvider>
-      </BrowserRouter>
-    </>
-  )
+	return (
+		<>
+			<BrowserRouter>
+				<AuthcontextProvider>
+					<ProfileContextProvider>
+						<PostContextProvider>
+							<NavBar />
+							<Switch>
+								<Route exact path='/register' component={Register} />
+								<Route exact path='/login' component={Login} />
+								<ProtectedRoute exact path='/' component={Home} />
+								<ProtectedRoute exact path='/profile' component={Profile} />
+								<ProtectedRoute
+									exact
+									path='/profile/edit'
+									component={EditProfile}
+								/>
+								<ProtectedRoute exact path='/posts' component={Posts} />
+								<ProtectedRoute exact path='/newPost' component={NewPost} />
+								<ProtectedRoute exact path='/profile/:id' component={Profiles} />
+								<ProtectedRoute exact path='/post/:id' component={Post} />
+							</Switch>
+						</PostContextProvider>
+					</ProfileContextProvider>
+				</AuthcontextProvider>
+			</BrowserRouter>
+		</>
+	)
 }
 export default App

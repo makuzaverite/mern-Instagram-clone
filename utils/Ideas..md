@@ -4,3 +4,5 @@
 - making liking and unliking feature efficient
 - editing profile image
 - Explore posts
+
+https://creativetacos.com/wp-content/uploads/2018/09/Free-Instagram-Web-Profile-Template-1.jpg
