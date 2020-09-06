@@ -4,7 +4,7 @@ import axios from 'axios'
 import './Profile.css'
 import { ProfileContext } from '../../../context/ProfileContext'
 import Spinner from '../../layout/Spinner'
-import { useHistory, Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { profile_types } from '../../../actions/profile_types'
 
 const Profile = () => {
@@ -37,7 +37,7 @@ const Profile = () => {
 
 	const history = useHistory()
 
-	const handleEdit = () => history.push('/profile/edit')
+	// const handleEdit = () => history.push('/profile/edit')
 
 	return Object.keys(profileState).length === 0 && profileState.constructor === Object ? (
 		<Spinner />
@@ -103,7 +103,9 @@ const Profile = () => {
 					<div className='follow'>
 						<h3>username</h3>
 						<button className='follow_btn'>Follow</button>
-						<button className='more_btn'>More</button>
+						<button className='more_btn'>
+							<i className='fas fa-sort-down'></i>
+						</button>
 					</div>
 
 					<div className='posts_summary'>
@@ -119,10 +121,13 @@ const Profile = () => {
 					</div>
 
 					<div className='fullinfo'>
-						<h3>Makuza Verite</h3>
+						<h4>Makuza Verite</h4>
 						<p>
 							Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero,
-							laboriosam!
+							laboriosam! Lorem ipsum dolor sit amet consectetur adipisicing elit.
+							Libero, laboriosam! Lorem ipsum dolor sit amet consectetur adipisicing
+							elit. Libero, laboriosam! Lorem ipsum dolor sit amet consectetur
+							adipisicing elit. Libero, laboriosam!
 						</p>
 					</div>
 					<div className='website'>
@@ -133,7 +138,40 @@ const Profile = () => {
 				</div>
 			</div>
 
-			<div className='profilePostGallery'></div>
+			<div className='profilePostGallery'>
+				<div className='tabs'>
+					<p>
+						<i className='far fa-list-alt'></i> Posts
+					</p>
+					<p>
+						<i className='fas fa-tv'></i>
+						IGTV
+					</p>
+					<p>
+						<i className='fas fa-user-tag'></i>
+						Tags
+					</p>
+					<p>
+						<i className='far fa-bookmark'></i>
+						Saved
+					</p>
+				</div>
+
+				<div className='postWrapper'>
+					<img src='https://source.unsplash.com/random' alt='posts_wrapper' />
+					<img src='https://source.unsplash.com/random' alt='posts_wrapper' />
+					<img src='https://source.unsplash.com/random' alt='posts_wrapper' />
+					<img src='https://source.unsplash.com/random' alt='posts_wrapper' />
+					<img src='https://source.unsplash.com/random' alt='posts_wrapper' />
+					<img src='https://source.unsplash.com/random' alt='posts_wrapper' />{' '}
+					<img src='https://source.unsplash.com/random' alt='posts_wrapper' />
+					<img src='https://source.unsplash.com/random' alt='posts_wrapper' />
+					<img src='https://source.unsplash.com/random' alt='posts_wrapper' />
+					<img src='https://source.unsplash.com/random' alt='posts_wrapper' />
+					<img src='https://source.unsplash.com/random' alt='posts_wrapper' />
+					<img src='https://source.unsplash.com/random' alt='posts_wrapper' />
+				</div>
+			</div>
 		</section>
 	)
 }
