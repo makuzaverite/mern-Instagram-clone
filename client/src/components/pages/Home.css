@@ -1,6 +1,10 @@
 .main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	margin-top: 5rem;
+}
+.profiles {
+	margin-left: 1rem;
+	margin-top: 2rem;
 }
