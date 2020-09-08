@@ -1,6 +1,6 @@
 import React from 'react'
 import './ProfileSnack.css'
-import avatar from '../../../assets/images/avatar.png'
+import avatar from '../../assets/images/avatar.png'
 
 function ProfileSnack() {
 	return (

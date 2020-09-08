@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useCallback } from 'react'
-import Avatar from './avatar.png'
+import Avatar from '../../../assets/images/avatar.png'
 import axios from 'axios'
 import './Profile.css'
 import { ProfileContext } from '../../../context/ProfileContext'

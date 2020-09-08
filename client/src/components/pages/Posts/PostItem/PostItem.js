@@ -6,6 +6,10 @@ import { AuthContext } from '../../../../context/AuthContext'
 import Avatar from '../../../../assets/images/avatar.png'
 import PostSampleImage from '../../../../assets/images/post_sample.jpeg'
 import Spinner from '../../../layout/Spinner'
+import LikeIcon from '../../../../assets/icons/like.svg'
+import CommentIcon from '../../../../assets/icons/comments.svg'
+import ShareIcon from '../../../../assets/icons/share.svg'
+import SaveIcon from '../../../../assets/icons/save.svg'
 import { Link } from 'react-router-dom'
 import './PostItem.css'
 
@@ -77,55 +81,41 @@ function PostItem(props) {
 	return !user ? (
 		<Spinner />
 	) : (
-		// <div className='post-section'>
-		// 	<div className='post-ownership'>
-		// 		<img src={Avatar} alt='userPhoto' className='userPhoto' />
-		// 		<span>
-		// 			<Link to={`/profile/${username}`}>{username}</Link>
-		// 		</span>
-		// 		<span>{new Date(date).toLocaleDateString()}</span>
-		// 	</div>
-		// 	<img className='post-image' src={postPhoto} alt={'name'} />
-		// 	<div className='reaction'>
-		// 		{findUser() && found ? (
-		// 			<i className='fa fa-heart' onClick={handleLike} style={{ color: 'red' }}>
-		// 				{likes.length}{' '}
-		// 			</i>
-		// 		) : (
-		// 			<i className='fa fa-heart-o' onClick={handleLike}>
-		// 				{likes.length > 0 ? likes.length : null}
-		// 			</i>
-		// 		)}
-		// 		<Link to={`/post/${_id}`}>
-		// 			<i className='fa fa-comment-o'>
-		// 				{comments.length > 0 ? comments.length : null}
-		// 			</i>
-		// 		</Link>
-		// 		{creator === user ? <i className='fa fa-trash' onClick={handleDelePost}></i> : null}
-		// 	</div>
-		// </div>
 		<section className='postItem'>
 			<div className='post_header'>
-				<img src={Avatar} alt='user_profile_avatar' />
+				<div className='post_header_user'>
+					<img src={Avatar} alt='user_profile_avatar' />
+					<Link to='#'>{username}</Link>
+				</div>
 				<div>
 					<h3>...</h3>{' '}
 				</div>
 			</div>
 			<div className='post_body'>
-				<img src={PostSampleImage} alt='post_image' />
+				<img src={postPhoto} alt='post_image' />
 			</div>
 			<div className='post_footer'>
 				<div className='post_footer_icons'>
-					<p>icons</p>
-					<p>icons</p>
-					<p>icons</p>
+					<div>
+						<img src={LikeIcon} alt='like_icon' />
+						<img src={CommentIcon} alt='comment_icon' />
+					</div>
+					<div>
+						<img src={SaveIcon} alt='bookmar' />
+					</div>
 				</div>
-				<div className='likes_count'>12 likes</div>
-				<div className='first 2 comments'>
+				<div className='likes_count'>
+					<p>
+						{likes.length > 0 && likes.length} {likes.length > 1 ? 'Likes' : 'Like'}{' '}
+					</p>
+				</div>
+				<div className='Pickedcomments'>
 					<p>first comment</p>
 					<p>second comment</p>
 				</div>
-				<div>Comment form</div>
+				<div>
+					<p>form here</p>
+				</div>
 			</div>
 		</section>
 	)
