@@ -1,5 +1,5 @@
 import React from 'react'
-import Posts from '../Posts/Post/Post'
+import Posts from '../Posts/Posts'
 import ProfileSnack from '../../ProfileSnackbar/ProfileSnack'
 import './Home.css'
 

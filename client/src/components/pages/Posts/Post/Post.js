@@ -12,7 +12,6 @@ export default function Post({ match }) {
 	const [post, setPost] = useState('')
 	const [comment, setComment] = useState('')
 	const [isLoading, setLoading] = useState(true)
-	console.log(match)
 	const id = match.params.id
 	const token = localStorage.getItem('auth-token')
 

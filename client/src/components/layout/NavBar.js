@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import './NavBar.css'
 import { Link, useHistory } from 'react-router-dom'
 import { AuthContext } from '../../context/AuthContext'
@@ -11,10 +11,13 @@ import LikeIcon from '../../assets/icons/like.svg'
 import AddPostIcon from '../../assets/icons/add_box.svg'
 import { auth_actions } from '../../actions/action_types'
 import { profile_types } from '../../actions/profile_types'
+import AddNewPost from '../../modals/AddNewPost'
 
 export default function NavBar() {
 	const { state, dispatch } = useContext(AuthContext)
 	const { profileDispatch } = useContext(ProfileContext)
+	const [isOpen, setisOpen] = useState(false)
+
 	const history = useHistory()
 	const logout = () => {
 		localStorage.setItem('auth-token', '')
@@ -58,7 +61,8 @@ export default function NavBar() {
 								/>
 							</Link>
 						</li>
-						<li>
+						<li onClick={() => setisOpen(true)}>
+							<AddNewPost isopen={isOpen} onClose={() => setisOpen(false)} />
 							<Link to='/'>
 								<img
 									src={AddPostIcon}

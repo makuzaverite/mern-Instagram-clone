@@ -26,7 +26,6 @@ function Posts() {
 						Authorization: token,
 					},
 				})
-				setisLoading(false)
 
 				if (res.data.data) {
 					if (mounted) {
@@ -34,6 +33,7 @@ function Posts() {
 							type: post_types.SET_POST,
 							payload: { data: res.data.data },
 						})
+						setisLoading(false)
 					}
 				}
 			} catch (error) {

@@ -13,7 +13,7 @@ import ProtectedRoute from './ProtectedRoute'
 import Posts from './components/pages/Posts/Posts'
 import NewPost from './components/pages/Posts/NewPost/NewPost'
 import Profiles from './components/pages/Profile/Profiles/Profiles'
-import Post from './components/pages/Posts/Post/Post'
+// import Post from './components/pages/Posts/Post/Post'
 
 function App() {
 	return (
@@ -36,7 +36,7 @@ function App() {
 								<ProtectedRoute exact path='/posts' component={Posts} />
 								<ProtectedRoute exact path='/newPost' component={NewPost} />
 								<ProtectedRoute exact path='/profile/:id' component={Profiles} />
-								<ProtectedRoute exact path='/post/:id' component={Post} />
+								{/* <ProtectedRoute exact path='/post/:id' component={Post} /> */}
 							</Switch>
 						</PostContextProvider>
 					</ProfileContextProvider>
