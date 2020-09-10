@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import axios from 'axios'
 import { post_types } from '../../../../actions/post_types'
 import { PostContext } from '../../../../context/PostContext'
@@ -10,18 +10,15 @@ import LikedIcon from '../../../../assets/icons/liked.svg'
 import CommentIcon from '../../../../assets/icons/comments.svg'
 import ShareIcon from '../../../../assets/icons/share.svg'
 import SaveIcon from '../../../../assets/icons/save.svg'
-import { Link } from 'react-router-dom'
 import './PostItem.css'
 import { motion } from 'framer-motion'
+import PostItemHeader from './PostItemHeader'
 
 function PostItem(props) {
 	const { state } = useContext(AuthContext)
 	const { postDispatch } = useContext(PostContext)
-	const { date, postPhoto, username, user, _id, likes, comments, caption } = props.post
-	const creator = props.creator
+	const { postPhoto, username, user, _id, likes, comments, caption } = props.post
 	const token = localStorage.getItem('auth-token')
-
-	let found = true
 
 	const findUser = () => {
 		if (likes.filter((like) => like.user === state.user._id).length > 0) {
@@ -48,7 +45,6 @@ function PostItem(props) {
 				},
 			})
 			if (res.data.data) {
-				found = true
 				postDispatch({ type: post_types.ADD_LIKE, payload: res.data.data })
 			}
 		} catch (error) {
@@ -67,7 +63,6 @@ function PostItem(props) {
 				},
 			})
 			if (res.data.data) {
-				found = false
 				postDispatch({ type: post_types.UN_LIKE, payload: res.data.data })
 				return
 			}
@@ -85,15 +80,7 @@ function PostItem(props) {
 		<Spinner />
 	) : (
 		<section className='postItem'>
-			<div className='post_header'>
-				<div className='post_header_user'>
-					<img src={Avatar} alt='user_profile_avatar' />
-					<Link to='#'>{username}</Link>
-				</div>
-				<div>
-					<h3>...</h3>{' '}
-				</div>
-			</div>
+			<PostItemHeader avatar={Avatar} username={username} />
 			<div className='post_body'>
 				<img src={postPhoto} alt='post_image' />
 			</div>
@@ -117,7 +104,7 @@ function PostItem(props) {
 					</div>
 				</div>
 				<div className='likes_count'>
-					<p>
+					<div>
 						{likes.length > 0 && (
 							<div>
 								<h1>
@@ -127,7 +114,7 @@ function PostItem(props) {
 								</h1>
 							</div>
 						)}
-					</p>
+					</div>
 				</div>
 
 				<div className='caption'>

@@ -23,6 +23,8 @@ exports.getPost = asyncHandler(async (req, res, next) => {
 exports.createpost = asyncHandler(async (req, res, next) => {
 	const profile = await Profile.findOne({ user: req.user.id })
 
+	console.log(1)
+
 	if (!profile) {
 		return next(new ErrorResponse(`No profile found`, 403))
 	}

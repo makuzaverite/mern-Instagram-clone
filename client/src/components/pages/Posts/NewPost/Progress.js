@@ -1,43 +1,11 @@
 import React from 'react'
-import './Progress.css'
+import { motion } from 'framer-motion'
 
-const Progress = (props) => {
-  const containerStyles = {
-    height: '20px',
-    textAlign: 'center',
-    fontFamily: 'Poppins',
-    width: '50%',
-    backgroundColor: '#b1a3c9',
-    borderRadius: '20px',
-    margin: 'auto',
-    marginBottom: '15px !important',
-  }
-
-  const filterStyles = {
-    height: '100%',
-    width: `${props.percentage}%`,
-    backgroundColor: '#4815a1',
-    borderRadius: 'inherit',
-    // textAlign: 'center',
-    transition: 'width 2s ease-in-out',
-  }
-
-  const labelStyles = {
-    padding: 5,
-    color: 'white',
-    fontWeight: 'bold',
-  }
-
-  return props.percentage ? (
-    <>
-      <p>Uploaded size</p>
-      <div style={containerStyles}>
-        <div style={filterStyles}>
-          <span style={labelStyles}>{props.percentage}%</span>
-        </div>
-      </div>
-    </>
-  ) : null
+export default function Progress({ progress }) {
+	return (
+		<motion.div
+			style={{ height: '5px', backgroundColor: '#b2003d', marginTop: '20px' }}
+			initial={{ width: 0 }}
+			animate={{ width: progress + '%', transition: { delay: 1 } }}></motion.div>
+	)
 }
-
-export default Progress

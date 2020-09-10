@@ -7,6 +7,7 @@ import { AuthContext } from '../../context/AuthContext'
 import axios from 'axios'
 import { PostContext } from '../../context/PostContext'
 import { post_types } from '../../actions/post_types'
+import Progress from '../pages/Posts/NewPost/Progress'
 
 const AddNewPost = ({ isopen, onClose }) => {
 	const [postImage, setpostImage] = useState([])
@@ -28,18 +29,33 @@ const AddNewPost = ({ isopen, onClose }) => {
 	}
 
 	const addPostArea = {
-		visible: { opacity: 1 },
-		hidden: { opacity: 0 },
+		hidden: {
+			opacity: 0,
+			transition: {
+				when: 'afterChildren',
+			},
+		},
+		visible: {
+			opacity: 1,
+			transition: {
+				when: 'beforeChildren',
+			},
+		},
 	}
 
 	const modal = {
 		hidden: {
-			y: '-100vh',
 			opacity: 0,
+			y: -200,
 		},
 		visible: {
-			y: '0',
 			opacity: 1,
+			y: 0,
+			transition: { delay: 0.5 },
+		},
+		leave: {
+			y: 200,
+			opacity: 0,
 			transition: { delay: 0.5 },
 		},
 	}
@@ -60,7 +76,7 @@ const AddNewPost = ({ isopen, onClose }) => {
 		formData.append('caption', postCaption)
 
 		try {
-			const res = await axios.post('http://localhost:3000/api/post', formData, {
+			const res = await axios.post('http://localhost:5000/api/post', formData, {
 				headers: {
 					'Content-Type': 'multipart/form-data',
 					Authorization: token,
@@ -69,7 +85,7 @@ const AddNewPost = ({ isopen, onClose }) => {
 					setuploadPercentage(
 						Math.round(parseInt(progressEvent.loaded * 100) / progressEvent.total)
 					)
-					setTimeout(() => setuploadPercentage(0), 10000)
+					setTimeout(() => setuploadPercentage(0), 3000)
 				},
 			})
 			if (res.data.data) {
@@ -79,12 +95,12 @@ const AddNewPost = ({ isopen, onClose }) => {
 					payload: res.data.data,
 				})
 			}
+
 			setPostCaption('')
 			setpostImage([])
 			onClose()
 		} catch (error) {
 			if (error.message.status === 5000) console.log('Some thing went wrong')
-
 			console.log(error)
 		}
 	}
@@ -100,10 +116,11 @@ const AddNewPost = ({ isopen, onClose }) => {
 					initial='hidden'
 					animate='visible'
 					exit='hidden'>
-					<motion.div className='addNewPostModal' variants={modal}>
+					<motion.div className='addNewPostModal' variants={modal} exit='leave'>
 						<button onClick={onClose} className='closeModal'>
 							X
 						</button>
+						<Progress progress={uploadPercentage} />
 						<DropZone
 							onDrop={handleDrop}
 							accept='image/*'

@@ -54,7 +54,7 @@ function Posts() {
 						!isLoading ? (
 							<PostItem key={`${post._id}`} post={post} creator={state.user._id} />
 						) : (
-							<Spinner key={`${Math.floor(Math.random() * 100)}`} />
+							<Spinner key={`${post._id}`} />
 						)
 					)
 				) : (

@@ -1,0 +1,42 @@
+.backDrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background-color: rgba(0, 0, 0, 0.9);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.modal {
+	background-color: #fff;
+	padding: 20px;
+	/* width: 500px; */
+	height: auto;
+	margin-top: -30rem;
+	padding: 30px;
+	border-radius: 1rem;
+}
+
+.postList {
+	list-style-type: none;
+	font-family: 'Poppins';
+	text-align: center;
+}
+.postList li {
+	color: rgb(43, 43, 43);
+	cursor: pointer;
+	margin-bottom: 1rem;
+}
+
+.postList li:hover {
+	color: #ccc;
+}
+
+.closeModal {
+	text-align: right;
+	display: block;
+	margin-bottom: 1rem;
+}
