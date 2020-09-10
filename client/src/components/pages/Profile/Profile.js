@@ -1,107 +1,74 @@
-import React, { useContext, useEffect, useCallback } from 'react'
+import React, { useEffect, useState } from 'react'
 import Avatar from '../../../assets/images/avatar.png'
 import axios from 'axios'
 import './Profile.css'
-import { ProfileContext } from '../../../context/ProfileContext'
 import Spinner from '../../layout/Spinner'
-import { useHistory } from 'react-router-dom'
-import { profile_types } from '../../../actions/profile_types'
+import { Redirect } from 'react-router-dom'
+import ProfilePostList from './ProfilePostList'
 
-const Profile = () => {
-	const { profileState, profileDispatch } = useContext(ProfileContext)
+const Profile = ({ match }) => {
+	const [profilePhoto, setProfilePhoto] = useState('')
+	const [Username, setUsername] = useState('')
+	const [biography, setBiography] = useState('')
+	const [gender, setGender] = useState('')
+	const [website, setWebsite] = useState('')
+	const [error, setError] = useState(false)
+	const [posts, setPosts] = useState([])
+	const [followers, setFollowers] = useState([])
 
-	const changeProfile = useCallback(profileDispatch, [profileState])
+	const { username } = match.params
 
 	useEffect(() => {
 		const currentLoggedIn = async () => {
 			const token = await localStorage.getItem('auth-token')
 			try {
-				const prof = await axios.get(`/api/profile/me`, {
+				const prof = await axios.get(`/api/profile/` + username, {
 					headers: {
 						Authorization: token,
 					},
 				})
 
 				if (prof.data.data) {
-					changeProfile({
-						type: profile_types.SET_PROFILE,
-						payload: prof.data.data,
-					})
+					setProfilePhoto(prof.data.data.profilePhotos)
+					setUsername(prof.data.data.username)
+					setGender(prof.data.data.gender)
+					setFollowers(prof.data.data.followers)
+					setBiography(prof.data.data.bio)
+					setWebsite(prof.data.data.website)
 				}
+			} catch (error) {
+				setError(true)
+			}
+		}
+
+		const getPosts = async () => {
+			try {
+				const response = await axios.get('/api/post/user/' + username)
+				const { posts } = response.data
+				setPosts(posts)
 			} catch (error) {
 				console.log(error)
 			}
 		}
+
 		currentLoggedIn()
-	}, [changeProfile])
+		getPosts()
+	}, [setProfilePhoto, setUsername, setPosts, username])
 
-	const history = useHistory()
-
-	// const handleEdit = () => history.push('/profile/edit')
-
-	return Object.keys(profileState).length === 0 && profileState.constructor === Object ? (
+	return error ? (
+		<Redirect to='/notfound' />
+	) : !Username ? (
 		<Spinner />
 	) : (
-		// <div className="profile-page">
-		//   <section className="profile">
-		//     <div className="profile-avatar" style={{ margin: 'auto' }}>
-		//       <img src={Avatar} alt="avatar" align="center" />
-		//     </div>
-		//     <div className="profile-details">
-		//       {profileState.username ? (
-		//         <p>
-		//           username:{' '}
-		//           <span style={{ fontWeight: 'bold' }}>
-		//             {profileState.username}
-		//           </span>
-		//         </p>
-		//       ) : null}
-
-		//       {profileState.bio ? (
-		//         <p>
-		//           Bio:{' '}
-		//           <span style={{ fontWeight: 'bold' }}>{profileState.bio}</span>{' '}
-		//         </p>
-		//       ) : null}
-
-		//       {profileState.gender ? (
-		//         <p>
-		//           Gender:{' '}
-		//           <span style={{ fontWeight: 'bold' }}>{profileState.gender}</span>
-		//         </p>
-		//       ) : null}
-		//       {profileState.website ? (
-		//         <p>
-		//           Website:{' '}
-		//           <a href={profileState.website}>{profileState.website} </a>
-		//         </p>
-		//       ) : null}
-
-		//       {profileState.location ? (
-		//         <p>
-		//           Location:{' '}
-		//           <span style={{ fontWeight: 'bold' }}>
-		//             {profileState.location}
-		//           </span>
-		//         </p>
-		//       ) : null}
-
-		//       <button onClick={handleEdit} className="edit-btn">
-		//         Edit Profile
-		//       </button>
-		//     </div>
-		//   </section>
-		// </div>
-
 		<section className='profile-page'>
 			<div className='profiler__card'>
 				<div className='profile_avatar'>
-					<img src={Avatar} alt='profile' />
+					<img src={profilePhoto && Avatar} alt='profile' />
 				</div>
 
 				<div className='intro_to_user'>
 					<div className='follow'>
-						<h3>username</h3>
+						<h3>{Username}</h3>
 						<button className='follow_btn'>Follow</button>
 						<button className='more_btn'>
 							<i className='fas fa-sort-down'></i>
@@ -110,10 +77,11 @@ const Profile = () => {
 
 					<div className='posts_summary'>
 						<p>
-							<strong>14050</strong> Posts
+							<strong>{posts.length}</strong> {posts.length > 0 ? 'Posts' : 'Post'}
 						</p>
 						<p>
-							<strong>14050</strong> Followers
+							<strong>{followers.length}</strong>{' '}
+							{followers.length > 0 ? 'Followers' : 'Followers'}
 						</p>
 						<p>
 							<strong>14050</strong> Following
@@ -122,17 +90,12 @@ const Profile = () => {
 
 					<div className='fullinfo'>
 						<h4>Makuza Verite</h4>
-						<p>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero,
-							laboriosam! Lorem ipsum dolor sit amet consectetur adipisicing elit.
-							Libero, laboriosam! Lorem ipsum dolor sit amet consectetur adipisicing
-							elit. Libero, laboriosam! Lorem ipsum dolor sit amet consectetur
-							adipisicing elit. Libero, laboriosam!
-						</p>
+						<p>{biography}</p>
+						<p>{gender}</p>
 					</div>
 					<div className='website'>
-						<a target='_blank' href='www.makuza.com'>
-							www.makuza.com
+						<a href='http://www.makuza.com' target='_blank' rel='noopener noreferrer'>
+							{website}
 						</a>
 					</div>
 				</div>
@@ -158,18 +121,20 @@ const Profile = () => {
 				</div>
 
 				<div className='postWrapper'>
-					<img src='https://source.unsplash.com/random' alt='posts_wrapper' />
-					<img src='https://source.unsplash.com/random' alt='posts_wrapper' />
-					<img src='https://source.unsplash.com/random' alt='posts_wrapper' />
-					<img src='https://source.unsplash.com/random' alt='posts_wrapper' />
-					<img src='https://source.unsplash.com/random' alt='posts_wrapper' />
-					<img src='https://source.unsplash.com/random' alt='posts_wrapper' />{' '}
-					<img src='https://source.unsplash.com/random' alt='posts_wrapper' />
-					<img src='https://source.unsplash.com/random' alt='posts_wrapper' />
-					<img src='https://source.unsplash.com/random' alt='posts_wrapper' />
-					<img src='https://source.unsplash.com/random' alt='posts_wrapper' />
-					<img src='https://source.unsplash.com/random' alt='posts_wrapper' />
-					<img src='https://source.unsplash.com/random' alt='posts_wrapper' />
+					{posts.length > 0 ? (
+						posts.map((post) => <ProfilePostList key={post._id} post={post} />)
+					) : (
+						<div
+							style={{
+								display: 'flex',
+								justifyContent: 'center',
+								alignItems: 'center',
+								width: '100%',
+								textAlign: 'center',
+							}}>
+							<h4 style={{ textAlign: 'center' }}>No post found</h4>
+						</div>
+					)}
 				</div>
 			</div>
 		</section>

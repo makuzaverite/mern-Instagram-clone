@@ -10,7 +10,7 @@ function PostItemHeader({ avatar, username }) {
 		<div className='post_header'>
 			<div className='post_header_user'>
 				<img src={avatar} alt='user_profile_avatar' />
-				<Link to='#'>{username}</Link>
+				<Link to={`/${username}`}>{username}</Link>
 			</div>
 
 			<MoreToPost isOpen={isMoreModalOpen} onClose={() => setisMoreModalOpen(false)} />

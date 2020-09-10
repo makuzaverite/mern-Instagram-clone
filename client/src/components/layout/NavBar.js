@@ -15,7 +15,7 @@ import AddNewPost from '../modals/AddNewPost'
 
 export default function NavBar() {
 	const { state, dispatch } = useContext(AuthContext)
-	const { profileDispatch } = useContext(ProfileContext)
+	const { profileState, profileDispatch } = useContext(ProfileContext)
 	const [isOpen, setisOpen] = useState(false)
 
 	const history = useHistory()
@@ -98,7 +98,7 @@ export default function NavBar() {
 							</Link>
 						</li>
 						<li>
-							<Link to='/profile'>
+							<Link to={`/${profileState.username}`}>
 								<img src={Avatar} alt='Avatar' align='center' tooltip='profile' />
 							</Link>
 						</li>

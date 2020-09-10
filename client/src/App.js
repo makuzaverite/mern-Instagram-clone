@@ -12,6 +12,7 @@ import Profile from './components/pages/Profile/Profile'
 import ProtectedRoute from './ProtectedRoute'
 import Posts from './components/pages/Posts/Posts'
 import Profiles from './components/pages/Profile/Profiles/Profiles'
+import NotFound from './components/pages/NotFound'
 
 function App() {
 	return (
@@ -22,10 +23,13 @@ function App() {
 						<PostContextProvider>
 							<NavBar />
 							<Switch>
+								<Route exact path='/notfound'>
+									<NotFound />
+								</Route>
 								<Route exact path='/register' component={Register} />
 								<Route exact path='/login' component={Login} />
 								<ProtectedRoute exact path='/' component={Home} />
-								<ProtectedRoute exact path='/profile' component={Profile} />
+								<Route exact path='/:username' component={Profile} />
 								<ProtectedRoute
 									exact
 									path='/profile/edit'
@@ -34,7 +38,6 @@ function App() {
 								<ProtectedRoute exact path='/posts' component={Posts} />
 
 								<ProtectedRoute exact path='/profile/:id' component={Profiles} />
-								{/* <ProtectedRoute exact path='/post/:id' component={Post} /> */}
 							</Switch>
 						</PostContextProvider>
 					</ProfileContextProvider>
