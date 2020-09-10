@@ -4,19 +4,20 @@ import { post_types } from '../../../../actions/post_types'
 import { PostContext } from '../../../../context/PostContext'
 import { AuthContext } from '../../../../context/AuthContext'
 import Avatar from '../../../../assets/images/avatar.png'
-import PostSampleImage from '../../../../assets/images/post_sample.jpeg'
 import Spinner from '../../../layout/Spinner'
 import LikeIcon from '../../../../assets/icons/like.svg'
+import LikedIcon from '../../../../assets/icons/liked.svg'
 import CommentIcon from '../../../../assets/icons/comments.svg'
 import ShareIcon from '../../../../assets/icons/share.svg'
 import SaveIcon from '../../../../assets/icons/save.svg'
 import { Link } from 'react-router-dom'
 import './PostItem.css'
+import { motion } from 'framer-motion'
 
 function PostItem(props) {
 	const { state } = useContext(AuthContext)
 	const { postDispatch } = useContext(PostContext)
-	const { date, postPhoto, username, user, _id, likes, comments } = props.post
+	const { date, postPhoto, username, user, _id, likes, comments, caption } = props.post
 	const creator = props.creator
 	const token = localStorage.getItem('auth-token')
 
@@ -78,6 +79,8 @@ function PostItem(props) {
 		}
 	}
 
+	const likeIcon = !findUser() ? LikeIcon : LikedIcon
+
 	return !user ? (
 		<Spinner />
 	) : (
@@ -97,7 +100,16 @@ function PostItem(props) {
 			<div className='post_footer'>
 				<div className='post_footer_icons'>
 					<div>
-						<img src={LikeIcon} alt='like_icon' />
+						<motion.img
+							whileHover={{
+								scale: 1.2,
+								transition: { duration: 1 },
+								cursor: 'pointer',
+							}}
+							src={likeIcon}
+							alt='like_icon'
+							onClick={handleLike}
+						/>
 						<img src={CommentIcon} alt='comment_icon' />
 					</div>
 					<div>
@@ -106,16 +118,35 @@ function PostItem(props) {
 				</div>
 				<div className='likes_count'>
 					<p>
-						{likes.length > 0 && likes.length} {likes.length > 1 ? 'Likes' : 'Like'}{' '}
+						{likes.length > 0 && (
+							<div>
+								<h1>
+									{likes.length === 1
+										? `${likes.length} Like`
+										: `${likes.length} Likes`}
+								</h1>
+							</div>
+						)}
 					</p>
 				</div>
+
+				<div className='caption'>
+					<p className='caption_user'>
+						<strong>{username}</strong>
+					</p>
+					<p>{caption}</p>
+				</div>
 				<div className='Pickedcomments'>
-					<p>first comment</p>
-					<p>second comment</p>
+					{comments.map((comm) => (
+						<div key={comm._id}>
+							<p>{comm.names}</p>
+							<p>{comm.text}</p>
+						</div>
+					))}
 				</div>
-				<div>
+				{/* <div>
 					<p>form here</p>
-				</div>
+				</div> */}
 			</div>
 		</section>
 	)

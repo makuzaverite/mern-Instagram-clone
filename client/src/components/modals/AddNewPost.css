@@ -1,0 +1,77 @@
+.addnewPostOverlay {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgba(0, 0, 0, 0.7);
+	background-size: cover;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 100;
+}
+
+.addNewPostModal {
+	width: 600px;
+	height: auto;
+	background-color: #fff;
+	border-radius: 5px;
+	padding: 10px 20px;
+}
+
+.addNewPostZone {
+	text-align: center;
+	padding: 20px;
+	border: 3px dashed #eeeeee;
+	background-color: #fafafa;
+	color: #bdbdbd;
+	margin: 20px;
+	font-family: 'Poppins';
+}
+
+.accept {
+	border-color: #107c10 !important;
+}
+.reject {
+	border-color: #d83b01 !important;
+}
+
+.newPostFormControl {
+	font-family: 'Poppins', sans-serif;
+	padding: 20px;
+}
+
+.newPostFormControl label {
+	display: block;
+	color: rgba(41, 41, 41, 0.933);
+	margin-bottom: 5px;
+}
+.newPostFormControl input {
+	border: 2px solid #f0f0f0;
+	border-radius: 4px;
+	display: block;
+	width: 100%;
+	padding: 10px;
+	font-size: 14px;
+	font-family: inherit;
+}
+
+.newPostFormControl input[type='submit'] {
+	background-color: #b2003d;
+	color: #fff;
+	cursor: pointer;
+	border-radius: 5px;
+	outline: none;
+}
+
+.closeModal {
+	float: right;
+	border: none;
+	color: #b2003d;
+	background-color: transparent;
+	cursor: pointer;
+	outline: none;
+	font-size: 1.3rem;
+	font-weight: 900;
+}

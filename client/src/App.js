@@ -11,9 +11,7 @@ import EditProfile from './components/pages/Profile/EditProfile'
 import Profile from './components/pages/Profile/Profile'
 import ProtectedRoute from './ProtectedRoute'
 import Posts from './components/pages/Posts/Posts'
-import NewPost from './components/pages/Posts/NewPost/NewPost'
 import Profiles from './components/pages/Profile/Profiles/Profiles'
-// import Post from './components/pages/Posts/Post/Post'
 
 function App() {
 	return (
@@ -34,7 +32,7 @@ function App() {
 									component={EditProfile}
 								/>
 								<ProtectedRoute exact path='/posts' component={Posts} />
-								<ProtectedRoute exact path='/newPost' component={NewPost} />
+
 								<ProtectedRoute exact path='/profile/:id' component={Profiles} />
 								{/* <ProtectedRoute exact path='/post/:id' component={Post} /> */}
 							</Switch>
