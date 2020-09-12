@@ -13,6 +13,14 @@ exports.getPosts = asyncHandler(async (req, res, next) => {
 	res.status(200).json({ success: true, data: posts })
 })
 
+exports.getpostsBy = asyncHandler(async (req, res, next) => {
+	const { username } = req.params
+
+	const posts = await Post.find({ username })
+
+	res.status(200).json({ success: true, posts })
+})
+
 //get post
 exports.getPost = asyncHandler(async (req, res, next) => {
 	const post = await Post.findById(req.params.id).sort({ date: -1 })

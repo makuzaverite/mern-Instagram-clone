@@ -21,3 +21,9 @@
 	width: 500px;
 	height: auto;
 }
+
+.post_details_header {
+	font-family: 'Poppins';
+	font-weight: 600;
+	margin: 1rem 2rem;
+}

@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import ReactDOM from 'react-dom'
 import { motion } from 'framer-motion'
 import './PostDetailsModal.css'
+import { AuthContext } from '../../context/AuthContext'
 
 function PostDetailsModal({ post, isopen, onClose }) {
+	const { state } = useContext(AuthContext)
+	const { caption, likes, comments, date } = post
+	const { firstname, lastname } = state.user
+
 	const backdropVariants = {
 		hidden: {
 			opacity: 0,
@@ -42,6 +47,14 @@ function PostDetailsModal({ post, isopen, onClose }) {
 				onClick={onClose}>
 				<motion.div className='postDetailsModal' variants={modalVariants} exit='leave'>
 					<motion.img src={post.postPhoto} />
+					<motion.div className='post_details_header'>
+						<p>
+							{firstname} {lastname}
+						</p>
+						<p></p>
+					</motion.div>
+
+					<motion.div>{comments && comments.map((comm) => <p>comm</p>)}</motion.div>
 				</motion.div>
 			</motion.div>
 		</>,
