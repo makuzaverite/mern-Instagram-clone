@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
 import Spinner from '../../../layout/Spinner'
 import './Profiles.css'
-import { Link } from 'react-router-dom'
-import Avatar from '../avatar.png'
+// import { Link } from 'react-router-dom'
+// import Avatar from '../avatar.png'
 
 export default function Profiles({ match }) {
 	const [profile, setProfile] = useState()

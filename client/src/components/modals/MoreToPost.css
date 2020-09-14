@@ -22,7 +22,7 @@
 
 .postList {
 	list-style-type: none;
-	font-family: 'Poppins';
+	font-family: var(--primaryfont);
 	text-align: center;
 }
 .postList li {

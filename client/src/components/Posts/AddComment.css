@@ -1,0 +1,22 @@
+.add_comment {
+	position: relative;
+}
+
+.comment_input {
+	width: 100%;
+	border: 1px solid #f0efef;
+	outline: none;
+	padding: 15px 10px;
+	font-family: var(--primaryfont);
+}
+.submit_comment {
+	position: absolute;
+	right: 10px;
+	background: none;
+	outline: none;
+	border: none;
+	color: royalblue;
+	font-family: var(--primaryfont);
+	top: 15px;
+	cursor: pointer;
+}

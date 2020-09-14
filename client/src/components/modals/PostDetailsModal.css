@@ -4,10 +4,11 @@
 	top: 0;
 	left: 0;
 	right: 0;
-	background-color: rgba(0, 0, 0, 0.8);
+	background-color: rgb(0, 0, 0);
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-flow: column nowrap;
 }
 
 .postDetailsModal {
@@ -23,7 +24,12 @@
 }
 
 .post_details_header {
-	font-family: 'Poppins';
+	font-family: var(--primaryfont);
 	font-weight: 600;
-	margin: 1rem 2rem;
+	width: 300px;
+	display: flex;
+	justify-content: space-between;
+}
+.postDetailText {
+	padding: 1rem 2rem;
 }

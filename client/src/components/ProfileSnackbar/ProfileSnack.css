@@ -1,5 +1,5 @@
 .snackBar {
-	font-family: 'Poppins';
+	font-family: var(--primaryfont);
 	display: flex;
 	align-items: center;
 	justify-content: space-between;

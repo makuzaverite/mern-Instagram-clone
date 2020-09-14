@@ -3,12 +3,24 @@ import ReactDOM from 'react-dom'
 import { motion } from 'framer-motion'
 import './PostDetailsModal.css'
 import { AuthContext } from '../../context/AuthContext'
+import CommentListItem from '../Posts/CommentListItem'
+import AddComment from '../Posts/AddComment'
 
 function PostDetailsModal({ post, isopen, onClose }) {
 	const { state } = useContext(AuthContext)
 	const { caption, likes, comments, date } = post
 	const { firstname, lastname } = state.user
 
+	const formattedDate = (date) => {
+		const currDate = new Date(date).getDate()
+		const currMonth = new Date(date).getMonth()
+		const currYear = new Date(date).getFullYear()
+		return `${currDate < 10 ? '0' + currDate : currDate}/${
+			currMonth < 10 ? '0' + currMonth : currMonth
+		}/${currYear}`
+	}
+
+	// console.log(post)
 	const backdropVariants = {
 		hidden: {
 			opacity: 0,
@@ -43,18 +55,23 @@ function PostDetailsModal({ post, isopen, onClose }) {
 				initial='hidden'
 				animate='visible'
 				exit='hidden'
-				className='postDetails'
-				onClick={onClose}>
+				className='postDetails'>
+				<button onClick={onClose} className='closeButton'>
+					X
+				</button>
 				<motion.div className='postDetailsModal' variants={modalVariants} exit='leave'>
 					<motion.img src={post.postPhoto} />
-					<motion.div className='post_details_header'>
-						<p>
-							{firstname} {lastname}
-						</p>
-						<p></p>
-					</motion.div>
+					<motion.div className='postDetailText'>
+						<motion.div className='post_details_header'>
+							<p>
+								{firstname} {lastname}
+							</p>
+							<p>Posted at {formattedDate(date)}</p>
+						</motion.div>
 
-					<motion.div>{comments && comments.map((comm) => <p>comm</p>)}</motion.div>
+						<CommentListItem comments={comments} />
+						<AddComment />
+					</motion.div>
 				</motion.div>
 			</motion.div>
 		</>,

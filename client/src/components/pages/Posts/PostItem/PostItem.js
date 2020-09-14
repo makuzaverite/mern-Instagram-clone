@@ -13,6 +13,7 @@ import './PostItem.css'
 import { motion } from 'framer-motion'
 import PostItemHeader from './PostItemHeader'
 import PostDetailsModal from '../../../modals/PostDetailsModal'
+import AddComment from '../../../Posts/AddComment'
 
 function PostItem(props) {
 	const { state } = useContext(AuthContext)
@@ -139,6 +140,7 @@ function PostItem(props) {
 							</div>
 						))}
 					</div>
+					<AddComment />
 					{/* <div>
 					<p>form here</p>
 				</div> */}

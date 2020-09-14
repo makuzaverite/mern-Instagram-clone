@@ -5,15 +5,15 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	font-family: Poppins;
+	font-family: var(--primaryfont);
 }
 .profiler__card {
 	display: grid;
 	grid-template-columns: auto auto;
-	grid-gap: 50px;
+	grid-gap: 100px;
 	max-width: 100%;
 	padding: 20px 10px;
-	font-family: Poppins;
+	font-family: var(--primaryfont);
 }
 .follow {
 	display: flex;
@@ -22,6 +22,7 @@
 
 .profile_avatar img {
 	width: 150px;
+	height: 143px;
 }
 
 .follow > * {

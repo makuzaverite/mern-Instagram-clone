@@ -27,7 +27,7 @@
 	background-color: #fafafa;
 	color: #bdbdbd;
 	margin: 20px;
-	font-family: 'Poppins';
+	font-family: var(--primaryfont);
 }
 
 .accept {
@@ -38,7 +38,7 @@
 }
 
 .newPostFormControl {
-	font-family: 'Poppins', sans-serif;
+	font-family: var(--primaryfont);
 	padding: 20px;
 }
 
