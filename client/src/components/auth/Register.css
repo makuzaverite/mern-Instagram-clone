@@ -6,7 +6,7 @@
 	height: 10rem;
 	flex-direction: column;
 	max-width: 100%;
-	font-family: 'Poppins', sans-serif;
+	font-family: var(--primaryfont);
 }
 
 .register form {
@@ -22,7 +22,7 @@
 
 .register .form-control {
 	margin-bottom: 1px;
-	padding-bottom: 2px;
+	padding-bottom: 20px;
 	position: relative;
 }
 

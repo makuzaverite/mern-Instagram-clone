@@ -88,7 +88,11 @@ function PostItem(props) {
 				isopen={ispostDetailsOpen}
 				onClose={() => setIsPostDetailsOpen(false)}
 			/>
-			<section className='postItem'>
+			<motion.section
+				className='postItem'
+				initial={{ opacity: 1 }}
+				animate={{ opacity: 1 }}
+				transition={{ delay: 3 }}>
 				<PostItemHeader avatar={Avatar} username={username} />
 				<div className='post_body' onClick={() => setIsPostDetailsOpen(true)}>
 					<img src={postPhoto} alt='post_image' />
@@ -141,11 +145,8 @@ function PostItem(props) {
 						))}
 					</div>
 					<AddComment />
-					{/* <div>
-					<p>form here</p>
-				</div> */}
 				</div>
-			</section>
+			</motion.section>
 		</>
 	)
 }

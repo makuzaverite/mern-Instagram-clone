@@ -1,7 +1,7 @@
 import React from 'react'
 import './AddComment.css'
 
-function AddComment() {
+function AddComment({ postId }) {
 	function handleSubmit(e) {
 		e.preventDefault()
 	}
