@@ -4,7 +4,7 @@ import { AuthContext } from '../../context/AuthContext'
 import AuthError from '../error/authError'
 import { useHistory, Link } from 'react-router-dom'
 import axios from 'axios'
-import { auth_actions } from '../../actions/action_types'
+import { auth_actions } from '../../actionsTypes/action_types'
 // import { ProfileContext } from '../../context/ProfileContext'
 // import { profile_types } from '../../actions/profile_types'
 

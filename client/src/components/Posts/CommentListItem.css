@@ -1,0 +1,9 @@
+.no_comment {
+	font-family: var(--primaryfont);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-flow: column wrap;
+	height: 300px;
+	font-weight: 300;
+}

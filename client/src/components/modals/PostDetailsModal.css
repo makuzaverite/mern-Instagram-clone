@@ -26,10 +26,31 @@
 .post_details_header {
 	font-family: var(--primaryfont);
 	font-weight: 600;
-	width: 300px;
 	display: flex;
 	justify-content: space-between;
 }
+
 .postDetailText {
-	padding: 1rem 2rem;
+	width: 24rem;
+	padding: 20px 10px;
+	position: relative;
+}
+
+.closeButton {
+	font-size: 2rem;
+	position: absolute;
+	top: 1rem;
+	outline: none;
+	right: 1rem;
+	border: none;
+	background-color: transparent;
+	color: #fff;
+	cursor: pointer;
+}
+
+.comment_box {
+	position: absolute;
+	bottom: 1rem;
+	display: block;
+	width: 23rem;
 }

@@ -1,7 +1,15 @@
 import React from 'react'
+import './CommentListItem.css'
 
 function commentListItem({ comments }) {
-	return comments.length === 0 ? <p>Not comments added yet</p> : <p>comments are listed here</p>
+	return comments.length === 0 ? (
+		<div className='no_comment'>
+			<p>Not comments added yet</p>
+			<p>You may add one</p>
+		</div>
+	) : (
+		<p>comments are listed here</p>
+	)
 }
 
 export default commentListItem

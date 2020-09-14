@@ -4,7 +4,7 @@ import { AuthContext } from '../../context/AuthContext'
 import { useHistory, Link } from 'react-router-dom'
 import AuthError from '../error/authError'
 import axios from 'axios'
-import { auth_actions } from '../../actions/action_types'
+import { auth_actions } from '../../actionsTypes/action_types'
 
 function Login() {
 	const { dispatch } = useContext(AuthContext)

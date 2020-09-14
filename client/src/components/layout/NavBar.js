@@ -9,8 +9,8 @@ import ShareIcon from '../../assets/icons/share.svg'
 import ExploreIcon from '../../assets/icons/explore.svg'
 import LikeIcon from '../../assets/icons/like.svg'
 import AddPostIcon from '../../assets/icons/add_box.svg'
-import { auth_actions } from '../../actions/action_types'
-import { profile_types } from '../../actions/profile_types'
+import { auth_actions } from '../../actionsTypes/action_types'
+import { profile_types } from '../../actionsTypes/profile_types'
 import AddNewPost from '../modals/AddNewPost'
 
 export default function NavBar() {

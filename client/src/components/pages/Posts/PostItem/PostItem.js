@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import axios from 'axios'
-import { post_types } from '../../../../actions/post_types'
+import { post_types } from '../../../../actionsTypes/post_types'
 import { PostContext } from '../../../../context/PostContext'
 import { AuthContext } from '../../../../context/AuthContext'
 import Avatar from '../../../../assets/images/avatar.png'
@@ -77,7 +77,7 @@ function PostItem(props) {
 		}
 	}
 
-	const likeIcon = !findUser() ? LikeIcon : LikedIcon
+	const LikeIconButton = !findUser() ? LikeIcon : LikedIcon
 
 	return !user ? (
 		<Spinner />
@@ -102,7 +102,7 @@ function PostItem(props) {
 									transition: { duration: 1 },
 									cursor: 'pointer',
 								}}
-								src={likeIcon}
+								src={LikeIconButton}
 								alt='like_icon'
 								onClick={handleLike}
 							/>

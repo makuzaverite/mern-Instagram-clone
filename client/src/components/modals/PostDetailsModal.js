@@ -70,7 +70,10 @@ function PostDetailsModal({ post, isopen, onClose }) {
 						</motion.div>
 
 						<CommentListItem comments={comments} />
-						<AddComment />
+
+						<div className='comment_box'>
+							<AddComment />
+						</div>
 					</motion.div>
 				</motion.div>
 			</motion.div>

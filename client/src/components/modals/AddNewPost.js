@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { AuthContext } from '../../context/AuthContext'
 import axios from 'axios'
 import { PostContext } from '../../context/PostContext'
-import { post_types } from '../../actions/post_types'
+import { post_types } from '../../actionsTypes/post_types'
 import Progress from '../pages/Posts/NewPost/Progress'
 
 const AddNewPost = ({ isopen, onClose }) => {

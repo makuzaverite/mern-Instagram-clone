@@ -2,7 +2,7 @@ import React, { createContext, useReducer, useEffect, useContext } from 'react'
 import { ProfileReducer } from '../reducers/profile_reducer'
 import { AuthContext } from './AuthContext'
 import axios from 'axios'
-import { profile_types } from '../actions/profile_types'
+import { profile_types } from '../actionsTypes/profile_types'
 
 const initialState = {
 	followers: [],
