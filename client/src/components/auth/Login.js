@@ -25,12 +25,12 @@ function Login() {
 		setloading(true)
 
 		try {
-			const login = await axios.post('/api/auth/login', userData)
+			const login = await axios.post('http://localhost:5000/api/auth/login', userData)
 			const token = login.data.token
 
 			await localStorage.setItem('auth-token', `Bearer ${token}`)
 
-			const getMe = await axios.get('/api/auth/me', {
+			const getMe = await axios.get('http://localhost:5000/api/auth/me', {
 				headers: {
 					Authorization: `Bearer ${token}`,
 				},
@@ -45,9 +45,9 @@ function Login() {
 
 			history.push('/')
 		} catch (err) {
-			console.log(error)
+			console.log(err)
 			setloading(false)
-			setError(err.response || 'some thing went wrong')
+			setError('Invalid Credentials')
 		}
 	}
 

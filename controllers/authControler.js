@@ -27,9 +27,6 @@ exports.login = asynHandler(async (req, res, next) => {
 	if (!email || !password) {
 		return next(new ErrorResponse(`Please provide an email and provide`, 400))
 	}
-
-	console.log(email, password)
-
 	//check for the user
 	const user = await User.findOne({ email }).select('+password')
 
@@ -42,6 +39,7 @@ exports.login = asynHandler(async (req, res, next) => {
 	if (!isMatch) {
 		return next(new ErrorResponse(`Invalid credintails`, 401))
 	}
+
 	sendTokenResponse(user, 200, res)
 })
 
