@@ -41,11 +41,13 @@ function Login() {
 				payload: { data: getMe.data, token },
 			})
 
+			console.log(login)
+
 			history.push('/')
 		} catch (err) {
-			setloading(false)
 			console.log(error)
-			setError(err.response)
+			setloading(false)
+			setError(err.response || 'some thing went wrong')
 		}
 	}
 

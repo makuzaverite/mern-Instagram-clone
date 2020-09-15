@@ -11,6 +11,7 @@ const PostSchema = new mongoose.Schema({
 	},
 	username: {
 		type: String,
+		required: true,
 	},
 	likes: [
 		{
@@ -20,7 +21,9 @@ const PostSchema = new mongoose.Schema({
 			},
 		},
 	],
-	caption: String,
+	caption: {
+		type: String,
+	},
 	comments: [
 		{
 			user: {

@@ -28,6 +28,8 @@ exports.login = asynHandler(async (req, res, next) => {
 		return next(new ErrorResponse(`Please provide an email and provide`, 400))
 	}
 
+	console.log(email, password)
+
 	//check for the user
 	const user = await User.findOne({ email }).select('+password')
 

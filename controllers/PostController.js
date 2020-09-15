@@ -3,7 +3,7 @@ const asyncHandler = require('../middleware/async')
 const Post = require('../models/PostModel')
 const Profile = require('../models/profileModel')
 const router = require('../routers/post')
-const { post } = require('../routers/post')
+const post = require('../routers/post')
 const path = require('path')
 const mongoose = require('mongoose')
 

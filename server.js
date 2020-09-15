@@ -18,7 +18,7 @@ dotenv.config({ path: './config/.env' })
 connetDB()
 
 if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('dev'))
+	app.use(morgan('dev'))
 }
 
 //For handling fileuploading
@@ -33,10 +33,10 @@ const profile = require('./routers/profile')
 const post = require('./routers/post')
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'))
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-  })
+	app.use(express.static('client/build'))
+	app.get('*', (req, res) => {
+		res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+	})
 }
 
 //Mount routers
@@ -49,13 +49,11 @@ app.use(errorHandler)
 
 const PORT = process.env.PORT || 5000
 const server = app.listen(PORT, () =>
-  console.log(
-    `Server is running in ${process.env.NODE_ENV} mode at ${PORT}`.yellow.bold
-  )
+	console.log(`Server is running in ${process.env.NODE_ENV} mode at ${PORT}`.yellow.bold)
 )
 
 //Handled promise rejection
 process.on('unhandledRejection', (error, promise) => {
-  console.log(`Error: ${error.message}`.red)
-  server.close(() => process.exit(1))
+	console.log(`Error: ${error.message}`.red)
+	server.close(() => process.exit(1))
 })
