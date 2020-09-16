@@ -8,7 +8,7 @@ function commentListItem({ comments, limit }) {
 			<p>You may add one</p>
 		</div>
 	) : (
-		<p>comments are listed here</p>
+		<div className='commentsWrapper'></div>
 	)
 }
 

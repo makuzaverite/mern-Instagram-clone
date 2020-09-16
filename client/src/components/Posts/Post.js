@@ -34,34 +34,6 @@ export default function Post({ match }) {
 		getPost()
 	}, [id, postChange])
 
-	const handleComment = async (e) => {
-		e.preventDefault()
-		if (comment.length === 0) {
-			alert('Please add a comment')
-			return
-		}
-		let token = await localStorage.getItem('auth-token')
-
-		try {
-			const res = await axios.post(
-				`/api/post/comment/${post._id}`,
-				{ text: comment },
-				{
-					headers: {
-						Authorization: token,
-					},
-				}
-			)
-
-			if (res.data.data) {
-				setComment('')
-				postDispatch({ type: post_types.ADD_COMMENT, payload: res.data.data })
-			}
-		} catch (error) {
-			console.log(error.response.data.error)
-		}
-	}
-
 	const handleDelete = async (id) => {
 		const res = await axios.delete(`/api/post/comment/${post._id}/${id}`, {
 			headers: {
@@ -96,7 +68,6 @@ export default function Post({ match }) {
 				{postState.posts.comments !== undefined ? (
 					postState.posts.comments.map((item) => (
 						<p className='comment__msg' key={item._id.toString()}>
-							{' '}
 							<span>
 								<span style={{ fontWeight: 'bold' }}>{item.username}</span>{' '}
 								{item.text}

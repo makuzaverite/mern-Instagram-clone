@@ -43,7 +43,10 @@ export const PostReducer = (state, action) => {
 			}
 		case post_types.ADD_COMMENT:
 			return {
-				posts: action.payload,
+				posts: state.posts.map((post) => {
+					if (post._id === action.payload._id) return (post = action.payload)
+					return post
+				}),
 				isLoading: false,
 			}
 		case post_types.DELETE_COMMENT:

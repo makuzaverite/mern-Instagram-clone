@@ -135,7 +135,7 @@ function PostItem(props) {
 							</div>
 						))}
 					</div>
-					<AddComment />
+					<AddComment postId={_id} />
 				</div>
 			</motion.section>
 		</>
