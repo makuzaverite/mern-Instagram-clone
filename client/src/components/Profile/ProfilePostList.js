@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import PostDetailsModal from '../../modals/PostDetailsModal'
+import PostDetailsModal from '../modals/PostDetailsModal'
 
 export default function ProfilePostList({ post }) {
 	const [isPostsDetailsOpen, setPostsDetailsOpen] = useState(false)

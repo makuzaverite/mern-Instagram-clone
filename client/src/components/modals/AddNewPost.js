@@ -74,10 +74,10 @@ const AddNewPost = ({ isopen, onClose }) => {
 		formData.append('caption', postCaption)
 
 		try {
-			const res = await axios.post('http://localhost:5000/api/post', formData, {
+			const res = await axios.post('/api/post', formData, {
 				headers: {
 					'Content-Type': 'multipart/form-data',
-					Authorization: token,
+					Authorization: `Bearer ${token}`,
 				},
 				onUploadProgress: (progressEvent) => {
 					setuploadPercentage(

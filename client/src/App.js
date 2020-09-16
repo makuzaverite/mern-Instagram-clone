@@ -7,12 +7,12 @@ import NavBar from './components/layout/NavBar'
 import AuthcontextProvider from './context/AuthContext.js'
 import PostContextProvider from './context/PostContext.js'
 import ProfileContextProvider from './context/ProfileContext'
-import EditProfile from './components/pages/Profile/EditProfile'
-import Profile from './components/pages/Profile/Profile'
+import EditProfile from './components/Profile/EditProfile'
+import Profile from './components/Profile/Profile'
 import ProtectedRoute from './ProtectedRoute'
 import Posts from './components/pages/Posts/Posts'
 import Profiles from './components/pages/Profile/Profiles/Profiles'
-import NotFound from './components/pages/NotFound'
+import NotFound from './components/layout/NotFound'
 
 function App() {
 	return (

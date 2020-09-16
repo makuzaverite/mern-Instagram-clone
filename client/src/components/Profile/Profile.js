@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import Avatar from '../../../assets/images/avatar.png'
+import Avatar from '../../assets/images/avatar.png'
 import axios from 'axios'
 import './Profile.css'
-import Spinner from '../../layout/Spinner'
+import Spinner from '../layout/Spinner'
 import { Redirect } from 'react-router-dom'
 import ProfilePostList from './ProfilePostList'
 
@@ -19,14 +19,9 @@ const Profile = ({ match }) => {
 	const { username } = match.params
 
 	useEffect(() => {
-		const currentLoggedIn = async () => {
-			const token = await localStorage.getItem('auth-token')
+		const checkUserProfile = async () => {
 			try {
-				const prof = await axios.get(`/api/profile/` + username, {
-					headers: {
-						Authorization: token,
-					},
-				})
+				const prof = await axios.get(`/api/profile/` + username)
 
 				if (prof.data.data) {
 					setProfilePhoto(prof.data.data.profilePhotos)
@@ -51,7 +46,7 @@ const Profile = ({ match }) => {
 			}
 		}
 
-		currentLoggedIn()
+		checkUserProfile()
 		getPosts()
 	}, [setProfilePhoto, setUsername, setPosts, username])
 

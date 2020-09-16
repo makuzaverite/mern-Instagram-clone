@@ -1,10 +1,10 @@
 import React, { useContext, createRef, useState } from 'react'
-import Spinner from '../../layout/Spinner'
+import Spinner from '../layout/Spinner'
 import './EditProfile.css'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
-import { ProfileContext } from '../../../context/ProfileContext'
-import { profile_types } from '../../../actionsTypes/profile_types'
+import { ProfileContext } from '../../context/ProfileContext'
+import { profile_types } from '../../actionsTypes/profile_types'
 
 function EditProfile() {
 	const history = useHistory()
