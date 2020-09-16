@@ -12,11 +12,9 @@ import Progress from '../pages/Posts/NewPost/Progress'
 const AddNewPost = ({ isopen, onClose }) => {
 	const [postImage, setpostImage] = useState([])
 	const [postCaption, setPostCaption] = useState('')
-	const [error, setError] = useState('')
 	const { state } = useContext(AuthContext)
 	const { postDispatch } = useContext(PostContext)
 	const [uploadPercentage, setuploadPercentage] = useState(0)
-	const [message, setMessage] = useState('')
 
 	const handleDrop = (acceptedImage) => {
 		setpostImage(
@@ -89,7 +87,6 @@ const AddNewPost = ({ isopen, onClose }) => {
 				},
 			})
 			if (res.data.data) {
-				setMessage('Post added successfully')
 				postDispatch({
 					type: post_types.ADD_POST,
 					payload: res.data.data,

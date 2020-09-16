@@ -60,7 +60,6 @@ exports.getProfiles = asyncHandler(async (req, res) => {
 
 exports.getProfile = asyncHandler(async (req, res) => {
 	let profile = await Profile.findOne({ user: req.user._id })
-
 	res.status(200).json({ success: true, profile })
 })
 

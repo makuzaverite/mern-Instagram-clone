@@ -4,12 +4,16 @@ import avatar from '../../assets/images/avatar.png'
 import { AuthContext } from '../../context/AuthContext'
 import { ProfileContext } from '../../context/ProfileContext'
 import { Link } from 'react-router-dom'
+import Spinner from '../layout/Spinner'
 
 function ProfileSnack() {
 	const { state } = useContext(AuthContext)
 	const { profileState } = useContext(ProfileContext)
+	const { user } = state
 
-	return (
+	return state.isLoading ? (
+		<Spinner />
+	) : (
 		<div className='snackBar'>
 			<img src={avatar} alt='avatar' />
 			<div>
@@ -17,7 +21,7 @@ function ProfileSnack() {
 					{profileState.username}
 				</Link>
 				<p className='userFullname'>
-					{state.user.firstname} {state.user.lastname}
+					{user.firstname} {user.lastname}
 				</p>
 			</div>
 		</div>

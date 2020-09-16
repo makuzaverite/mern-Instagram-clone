@@ -25,29 +25,29 @@ function Login() {
 		setloading(true)
 
 		try {
-			const login = await axios.post('http://localhost:5000/api/auth/login', userData)
+			const login = await axios.post('/api/auth/login', userData)
 			const token = login.data.token
 
-			await localStorage.setItem('auth-token', `Bearer ${token}`)
+			await localStorage.setItem('auth-token', token)
 
-			const getMe = await axios.get('http://localhost:5000/api/auth/me', {
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			})
+			try {
+				const getMe = await axios.get('/api/auth/me', {
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				})
 
-			dispatch({
-				type: auth_actions.LOGIN_SUCCESS,
-				payload: { data: getMe.data, token },
-			})
-
-			console.log(login)
-
-			history.push('/')
-		} catch (err) {
-			console.log(err)
+				dispatch({
+					type: auth_actions.LOGIN_SUCCESS,
+					payload: { data: getMe.data, token },
+				})
+				history.push('/')
+			} catch (error) {
+				setError('Somethinng went wrong try again')
+			}
+		} catch (error) {
 			setloading(false)
-			setError('Invalid Credentials')
+			setError('Invalid email or password')
 		}
 	}
 
@@ -55,7 +55,7 @@ function Login() {
 		<div className='login'>
 			<form onSubmit={handleLogin}>
 				<h2>iDrip Log into your account</h2>
-				{error !== undefined ? <AuthError error={error} /> : null}
+				{error && <AuthError error={error} />}
 				<div className='form-control'>
 					<label>Email </label>
 					<input
@@ -81,11 +81,8 @@ function Login() {
 					{' '}
 					{loadig ? (
 						<span>
-							<i
-								className='fa fa-circle-o-notch fa-spin'
-								style={{ marginRight: '5px', color: '#fff', fontSize: '20px' }}
-							/>{' '}
-							Logging in 😂
+							<i style={{ marginRight: '5px', color: '#fff', fontSize: '20px' }} />{' '}
+							Logging in
 						</span>
 					) : (
 						'Login'

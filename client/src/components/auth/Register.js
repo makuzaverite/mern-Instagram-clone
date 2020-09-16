@@ -65,7 +65,7 @@ function Register() {
 			const token = registrer.data.token
 
 			if (registrer.data.sucess) {
-				await localStorage.setItem('auth-token', `Bearer ${token}`)
+				await localStorage.setItem('auth-token', token)
 			}
 
 			const getMe = await axios.get('/api/auth/me', {
@@ -76,7 +76,7 @@ function Register() {
 			if (getMe.data.sucess) {
 				dispatch({
 					type: auth_actions.LOGIN_SUCCESS,
-					payload: { data: getMe.data.data, token: `Bearer ${token}` },
+					payload: { data: getMe.data.data, token: token },
 				})
 
 				history.push('/')

@@ -24,9 +24,10 @@ const AuthcontextProvider = (props) => {
 					localStorage.setItem('auth-token', '')
 					token = ''
 				}
+
 				const checkToken = await axios.get('/api/auth/me', {
 					headers: {
-						Authorization: token,
+						Authorization: `Bearer ${token}`,
 					},
 				})
 

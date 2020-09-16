@@ -29,7 +29,7 @@ const ProfileContextProvider = (props) => {
 				try {
 					const prof = await axios.get('/api/profile/me', {
 						headers: {
-							Authorization: state.token,
+							Authorization: `Bearer ${state.token}`,
 						},
 					})
 

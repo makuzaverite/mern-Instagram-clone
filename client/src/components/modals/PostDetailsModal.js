@@ -8,7 +8,7 @@ import AddComment from '../Posts/AddComment'
 
 function PostDetailsModal({ post, isopen, onClose }) {
 	const { state } = useContext(AuthContext)
-	const { caption, likes, comments, date } = post
+	const { comments, date } = post
 	const { firstname, lastname } = state.user
 
 	const formattedDate = (date) => {
