@@ -23,22 +23,9 @@ function PostItem(props) {
 
 	const [ispostDetailsOpen, setIsPostDetailsOpen] = useState(false)
 
-	const findUser = () => {
-		if (likes.filter((like) => like.user === state.user._id).length > 0) {
-			return true
-		}
-		return false
+	function HasLiked() {
+		return likes.some((like) => like.user === state.user._id)
 	}
-
-	// const handleDelePost = async () => {
-	// 	await axios.delete(`/api/post/${_id}`, {
-	// 		headers: {
-	// 			Authorization: token,
-	// 		},
-	// 	})
-
-	// 	postDispatch({ type: post_types.DELETE_POST, payload: _id })
-	// }
 
 	const handleLike = async () => {
 		try {
@@ -68,7 +55,7 @@ function PostItem(props) {
 		}
 	}
 
-	const LikeIconButton = findUser() ? LikedIcon : LikeIcon
+	const LikeIconButton = HasLiked() ? LikedIcon : LikeIcon
 
 	return !user ? (
 		<Spinner />
@@ -84,7 +71,7 @@ function PostItem(props) {
 				initial={{ opacity: 1 }}
 				animate={{ opacity: 1 }}
 				transition={{ delay: 3 }}>
-				<PostItemHeader avatar={Avatar} username={username} />
+				<PostItemHeader avatar={Avatar} user={user} post_id={_id} username={username} />
 				<div className='post_body' onClick={() => setIsPostDetailsOpen(true)}>
 					<img src={postPhoto} alt='post_image' />
 				</div>
@@ -128,12 +115,16 @@ function PostItem(props) {
 						<p>{caption}</p>
 					</div>
 					<div className='Pickedcomments'>
-						{comments.map((comm) => (
-							<div key={comm._id}>
-								<p>{comm.names}</p>
-								<p>{comm.text}</p>
-							</div>
-						))}
+						{comments.map(
+							(comm, index) =>
+								index < 3 && (
+									<div key={comm._id}>
+										<p>
+											<strong>{comm.names}</strong> {comm.text}
+										</p>
+									</div>
+								)
+						)}
 					</div>
 					<AddComment postId={_id} />
 				</div>

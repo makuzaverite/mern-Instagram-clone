@@ -1,9 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import ReactDOM from 'react-dom'
 import './MoreToPost.css'
+import axios from 'axios'
+import { post_types } from '../../actionsTypes/post_types'
+import { AuthContext } from '../../context/AuthContext'
+import { PostContext } from '../../context/PostContext'
 
-export default function MoreToPost({ isOpen, onClose }) {
+export default function MoreToPost({ isOpen, user, post_id, onClose }) {
+	const { postDispatch } = useContext(PostContext)
+	const { state } = useContext(AuthContext)
+
+	const found = user === state.user._id
+
 	const backdrop = {
 		hidden: {
 			opacity: 0,
@@ -30,6 +39,16 @@ export default function MoreToPost({ isOpen, onClose }) {
 		},
 	}
 
+	const handleDelePost = async () => {
+		await axios.delete(`/api/post/${post_id}`, {
+			headers: {
+				Authorization: `Bearer ${state.token}`,
+			},
+		})
+
+		postDispatch({ type: post_types.DELETE_POST, payload: post_id })
+	}
+
 	if (!isOpen) return null
 
 	return ReactDOM.createPortal(
@@ -51,9 +70,9 @@ export default function MoreToPost({ isOpen, onClose }) {
 
 						<ul className='postList'>
 							<li>Share this post</li>
-							<li>Delete this post</li>
+							{found && <li onClick={handleDelePost}>Delete this post</li>}
 							<li>Report</li>
-							<li>unfollow this person</li>
+							{!found && <li>unfollow this person</li>}
 						</ul>
 					</motion.div>
 				</motion.div>

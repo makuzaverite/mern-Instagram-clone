@@ -7,3 +7,15 @@
 	height: 300px;
 	font-weight: 300;
 }
+
+.commentsWrapper {
+	padding: 10px 20px;
+	height: 24rem;
+	overflow-y: scroll;
+}
+
+.commentsWrapper p {
+	font-family: var(--primaryfont);
+	font-weight: normal;
+	scroll-behavior: smooth;
+}

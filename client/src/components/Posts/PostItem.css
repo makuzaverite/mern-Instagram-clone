@@ -64,6 +64,8 @@
 	align-items: flex-start;
 	font-family: var(--primaryfont);
 	padding-left: 0.5rem;
+	margin-top: 10px;
+	margin-bottom: 5px;
 }
 .Pickedcomments p {
 	font-size: 15px;

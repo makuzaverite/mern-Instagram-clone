@@ -4,7 +4,7 @@ import { PostReducer } from '../reducers/post_reducer'
 import { post_types } from '../actionsTypes/post_types'
 
 const initialState = {
-	posts: '',
+	posts: [],
 	isLoading: true,
 }
 

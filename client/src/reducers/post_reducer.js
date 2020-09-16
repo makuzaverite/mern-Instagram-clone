@@ -35,10 +35,9 @@ export const PostReducer = (state, action) => {
 		case post_types.UN_LIKE:
 			return {
 				...state,
-				posts: state.posts.map((post) => {
-					if (post._id === action.payload._id) return (post = action.payload)
-					return post
-				}),
+				posts: state.posts.map((post) =>
+					post._id === action.payload._id ? (post = action.payload) : post
+				),
 				isLoading: false,
 			}
 		case post_types.ADD_COMMENT:
