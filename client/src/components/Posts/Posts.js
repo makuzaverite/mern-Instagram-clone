@@ -1,11 +1,11 @@
 import React, { useContext, useState, useCallback, useEffect } from 'react'
 import './Post.css'
-import PostItem from './PostItem/PostItem'
-import Spinner from '../../layout/Spinner'
-import { PostContext } from '../../../context/PostContext'
-import { AuthContext } from '../../../context/AuthContext'
+import PostItem from './PostItem'
+import Spinner from '../layout/Spinner'
+import { PostContext } from '../../context/PostContext'
+import { AuthContext } from '../../context/AuthContext'
 import axios from 'axios'
-import { post_types } from '../../../actionsTypes/post_types'
+import { post_types } from '../../actionsTypes/post_types'
 
 function Posts() {
 	const { postState, postDispatch } = useContext(PostContext)

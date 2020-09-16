@@ -1,19 +1,19 @@
 import React, { useContext, useState } from 'react'
 import axios from 'axios'
-import { post_types } from '../../../../actionsTypes/post_types'
-import { PostContext } from '../../../../context/PostContext'
-import { AuthContext } from '../../../../context/AuthContext'
-import Avatar from '../../../../assets/images/avatar.png'
-import Spinner from '../../../layout/Spinner'
-import LikeIcon from '../../../../assets/icons/like.svg'
-import LikedIcon from '../../../../assets/icons/liked.svg'
-import CommentIcon from '../../../../assets/icons/comments.svg'
-import SaveIcon from '../../../../assets/icons/save.svg'
+import { post_types } from '../../actionsTypes/post_types'
+import { PostContext } from '../../context/PostContext'
+import { AuthContext } from '../../context/AuthContext'
+import Avatar from '../../assets/images/avatar.png'
+import Spinner from '../layout/Spinner'
+import LikeIcon from '../../assets/icons/like.svg'
+import LikedIcon from '../../assets/icons/liked.svg'
+import CommentIcon from '../../assets/icons/comments.svg'
+import SaveIcon from '../../assets/icons/save.svg'
 import './PostItem.css'
 import { motion } from 'framer-motion'
 import PostItemHeader from './PostItemHeader'
-import PostDetailsModal from '../../../modals/PostDetailsModal'
-import AddComment from '../../../Posts/AddComment'
+import PostDetailsModal from '../modals/PostDetailsModal'
+import AddComment from '../Posts/AddComment'
 
 function PostItem(props) {
 	const { state } = useContext(AuthContext)
@@ -44,40 +44,31 @@ function PostItem(props) {
 		try {
 			const res = await axios.post(`/api/post/like/${_id}`, null, {
 				headers: {
-					Authorization: token,
+					Authorization: `Bearer ${token}`,
 				},
 			})
-			if (res.data.data) {
-				postDispatch({ type: post_types.ADD_LIKE, payload: res.data.data })
-			}
+			postDispatch({ type: post_types.ADD_LIKE, payload: res.data.data })
 		} catch (error) {
 			if (error.response.data.error === 'User already likes this post') {
-				handleUnlike(_id)
+				handleUnlike()
 			}
-			return
 		}
 	}
 
-	const handleUnlike = async (id) => {
+	const handleUnlike = async () => {
 		try {
-			const res = await axios.post(`/api/post/unlike/${id}`, null, {
+			const res = await axios.post(`/api/post/unlike/${_id}`, null, {
 				headers: {
-					Authorization: token,
+					Authorization: `Bearer ${token}`,
 				},
 			})
-			if (res.data.data) {
-				postDispatch({ type: post_types.UN_LIKE, payload: res.data.data })
-				return
-			}
-			handleUnlike(id)
-			return
+			postDispatch({ type: post_types.UN_LIKE, payload: res.data.data })
 		} catch (error) {
-			if (error.response.data.error === 'You have not liked this post') return
-			console.log(error.response.data.error)
+			if (error.response.data.error === 'You have not liked this post') handleLike()
 		}
 	}
 
-	const LikeIconButton = !findUser() ? LikeIcon : LikedIcon
+	const LikeIconButton = findUser() ? LikedIcon : LikeIcon
 
 	return !user ? (
 		<Spinner />

@@ -2,10 +2,7 @@ const ErrorResponse = require('../utils/errorResponse')
 const asyncHandler = require('../middleware/async')
 const Post = require('../models/PostModel')
 const Profile = require('../models/profileModel')
-const router = require('../routers/post')
-const post = require('../routers/post')
 const path = require('path')
-const mongoose = require('mongoose')
 
 //get posts
 exports.getPosts = asyncHandler(async (req, res, next) => {
@@ -30,8 +27,6 @@ exports.getPost = asyncHandler(async (req, res, next) => {
 //Create new post
 exports.createpost = asyncHandler(async (req, res, next) => {
 	const profile = await Profile.findOne({ user: req.user.id })
-
-	console.log(1)
 
 	if (!profile) {
 		return next(new ErrorResponse(`No profile found`, 403))

@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext, useCallback } from 'react'
 import axios from 'axios'
 import './Post.css'
-import Spinner from '../../../../components/layout/Spinner'
-import { post_types } from '../../../../actions/post_types'
+import Spinner from '../layout/Spinner'
+import { post_types } from '../../actions/post_types'
 import { PostContext } from '../../../../context/PostContext'
 import { AuthContext } from '../../../../context/AuthContext'
 

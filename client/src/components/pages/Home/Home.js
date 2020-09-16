@@ -1,6 +1,6 @@
 import React from 'react'
 import ProfileSnack from '../../Profile/ProfileSnack'
-import Posts from '../Posts/Posts'
+import Posts from '../../Posts/Posts'
 import './Home.css'
 
 function Home() {

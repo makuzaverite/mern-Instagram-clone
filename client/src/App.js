@@ -10,7 +10,7 @@ import ProfileContextProvider from './context/ProfileContext'
 import EditProfile from './components/Profile/EditProfile'
 import Profile from './components/Profile/Profile'
 import ProtectedRoute from './ProtectedRoute'
-import Posts from './components/pages/Posts/Posts'
+import Posts from './components/Posts/Posts'
 import Profiles from './components/pages/Profile/Profiles/Profiles'
 import NotFound from './components/layout/NotFound'
 

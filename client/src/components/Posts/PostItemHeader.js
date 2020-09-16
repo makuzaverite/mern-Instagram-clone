@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import MoreToPost from '../../../modals/MoreToPost'
+import MoreToPost from '../modals/MoreToPost'
 import { Link } from 'react-router-dom'
 import './PostItem.css'
 
