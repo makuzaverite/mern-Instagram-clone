@@ -17,6 +17,8 @@ function EditProfile() {
 	const token = localStorage.getItem('auth-token')
 	const [gender, setGender] = useState(profileState.gender)
 
+	const profileID = profileState.id
+
 	const handleEdit = async (e) => {
 		e.preventDefault()
 
@@ -29,10 +31,12 @@ function EditProfile() {
 		}
 
 		try {
-			const res = await axios.put(`/api/profile/${profileState.id}`, profile, {
+			console.log(profileID)
+
+			const res = await axios.put('/api/profile/' + profileID, profile, {
 				headers: {
 					'Content-Type': 'application/json',
-					Authorization: token,
+					Authorization: `Bearer ${token}`,
 				},
 			})
 
@@ -40,7 +44,8 @@ function EditProfile() {
 				type: profile_types.EDIT_PROFILE,
 				payload: res.data.data,
 			})
-			history.push('/profile')
+
+			history.push('/' + profileState.username)
 		} catch (error) {
 			console.log(error.response.message)
 		}

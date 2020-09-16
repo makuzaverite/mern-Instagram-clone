@@ -53,6 +53,7 @@ export const PostReducer = (state, action) => {
 				...state,
 				posts: action.payload,
 			}
+
 		default:
 			return state
 	}

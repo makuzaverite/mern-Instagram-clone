@@ -32,7 +32,7 @@ function App() {
 								<Route exact path='/:username' component={Profile} />
 								<ProtectedRoute
 									exact
-									path='/profile/edit'
+									path='/edit/profile'
 									component={EditProfile}
 								/>
 								<ProtectedRoute exact path='/posts' component={Posts} />

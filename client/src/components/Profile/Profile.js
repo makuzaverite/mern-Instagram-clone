@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Avatar from '../../assets/images/avatar.png'
 import axios from 'axios'
 import './Profile.css'
 import Spinner from '../layout/Spinner'
-import { Redirect } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import ProfilePostList from './ProfilePostList'
+import { AuthContext } from '../../context/AuthContext'
 
 const Profile = ({ match }) => {
 	const [profilePhoto, setProfilePhoto] = useState('')
@@ -12,9 +13,11 @@ const Profile = ({ match }) => {
 	const [biography, setBiography] = useState('')
 	const [gender, setGender] = useState('')
 	const [website, setWebsite] = useState('')
+	const [userId, setUserId] = useState('')
 	const [error, setError] = useState(false)
 	const [posts, setPosts] = useState([])
 	const [followers, setFollowers] = useState([])
+	const { state } = useContext(AuthContext)
 
 	const { username } = match.params
 
@@ -22,8 +25,8 @@ const Profile = ({ match }) => {
 		const checkUserProfile = async () => {
 			try {
 				const prof = await axios.get(`/api/profile/` + username)
-
 				if (prof.data.data) {
+					setUserId(prof.data.data.user)
 					setProfilePhoto(prof.data.data.profilePhotos)
 					setUsername(prof.data.data.username)
 					setGender(prof.data.data.gender)
@@ -50,6 +53,8 @@ const Profile = ({ match }) => {
 		getPosts()
 	}, [setProfilePhoto, setUsername, setPosts, username])
 
+	let isWhoLoggedIn = state.user._id === userId
+
 	return error ? (
 		<Redirect to='/notfound' />
 	) : !Username ? (
@@ -64,10 +69,20 @@ const Profile = ({ match }) => {
 				<div className='intro_to_user'>
 					<div className='follow'>
 						<h3>{Username}</h3>
-						<button className='follow_btn'>Follow</button>
-						<button className='more_btn'>
-							<i className='fas fa-sort-down'></i>
-						</button>
+
+						{!isWhoLoggedIn ? (
+							<>
+								<button className='follow_btn'>Follow</button>
+								<button className='more_btn'>
+									<i className='fas fa-sort-down'></i>
+								</button>
+							</>
+						) : (
+							<>
+								<Link to='/edit/profile'>Edit Profile</Link>
+								<p>More</p>
+							</>
+						)}
 					</div>
 
 					<div className='posts_summary'>
