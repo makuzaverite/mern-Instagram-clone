@@ -1,12 +1,11 @@
 .modal-wrapper {
 	position: fixed;
 	top: 5rem;
-	/* bottom: 10rem; */
 	right: 8rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border: 1px solid #dedede;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 	width: 200px;
 	max-width: 90%;
 }
@@ -21,26 +20,34 @@
 .modal-container::before {
 	content: '';
 	position: absolute;
-	width: 20px;
-	height: 30px;
-	top: -3rem;
-	width: 0;
-	height: 0;
-	border: 30px solid transparent;
-	border-bottom-color: #fff;
+	right: 9rem;
+	top: -1rem;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	width: 40px;
+	height: 40px;
+	background-color: #fff;
+	transform: rotate(45deg);
+	z-index: -1;
 }
 
 .modal-container ul {
 	list-style: none;
 	font-family: var(--primaryfont);
-	padding: 2rem;
+	padding: 10px 20px;
 	text-align: center;
 }
 
 .modal-container ul li {
 	text-decoration: none;
 	cursor: pointer;
-	padding: 5px 10px;
+	padding: 10px 12px;
+	display: flex;
+	align-items: center;
+}
+
+.modal-container ul li img {
+	width: 40px;
+	padding-right: 10px;
 }
 
 .modal-container ul li a {

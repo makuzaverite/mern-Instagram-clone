@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { AuthContext } from '../../context/AuthContext'
 import Avatar from '../../assets/images/avatar.png'
 import HomeIcon from '../../assets/icons/home.svg'
-import ShareIcon from '../../assets/icons/share.svg'
 import ExploreIcon from '../../assets/icons/explore.svg'
 import LikeIcon from '../../assets/icons/like.svg'
 import AddPostIcon from '../../assets/icons/add_box.svg'
@@ -40,17 +39,6 @@ export default function NavBar() {
 							</Link>
 						</li>
 
-						<li>
-							<Link to='/'>
-								<img
-									src={ShareIcon}
-									alt='Avatar'
-									align='center'
-									tooltip='profile'
-									height='100px'
-								/>
-							</Link>
-						</li>
 						<li>
 							<AddNewPost isopen={isOpen} onClose={() => setisOpen(false)} />
 							<Link to='/' onClick={() => setisOpen(true)}>
