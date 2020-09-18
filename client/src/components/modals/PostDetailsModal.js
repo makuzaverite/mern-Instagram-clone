@@ -9,7 +9,6 @@ import AddComment from '../Posts/AddComment'
 function PostDetailsModal({ post, isopen, onClose }) {
 	const { state } = useContext(AuthContext)
 	const { comments, date } = post
-	const { firstname, lastname } = state.user
 
 	const formattedDate = (date) => {
 		const currDate = new Date(date).getDate()
@@ -64,7 +63,7 @@ function PostDetailsModal({ post, isopen, onClose }) {
 					<motion.div className='postDetailText'>
 						<motion.div className='post_details_header'>
 							<p>
-								{firstname} {lastname}
+								{state.firstname} {state.lastname}
 							</p>
 							<p>Posted at {formattedDate(date)}</p>
 						</motion.div>

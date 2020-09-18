@@ -57,6 +57,10 @@ function EditProfile() {
 		<div className='edit-profile'>
 			<form onSubmit={handleEdit}>
 				<div className='form-control'>
+					<input type='hidden' id='profilePic' />
+				</div>
+
+				<div className='form-control'>
 					<label htmlFor='username'>Username</label>
 					<input
 						defaultValue={profileState.username}

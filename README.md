@@ -1,4 +1,4 @@
-## iDrip
+## Instgram clone
 
 > MERN project inspired by instagram
 

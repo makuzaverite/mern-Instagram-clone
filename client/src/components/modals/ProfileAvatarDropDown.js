@@ -43,10 +43,8 @@ function ProfileAvatarDropDown({ isOpen, onClose }) {
 								Settings
 							</Link>
 						</li>
-						<li onClick={logout}>
-							<img src={logoutIcon} alt='logout' />
-							Logout
-						</li>
+						<hr />
+						<li onClick={logout}>Logout</li>
 					</ul>
 				</div>
 			</div>

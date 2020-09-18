@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Avatar from '../../assets/images/avatar.png'
+import settingsIcon from '../../assets/icons/settings.svg'
 import axios from 'axios'
 import './Profile.css'
 import Spinner from '../layout/Spinner'
@@ -53,7 +54,11 @@ const Profile = ({ match }) => {
 		getPosts()
 	}, [setProfilePhoto, setUsername, setPosts, username])
 
-	let isWhoLoggedIn = state.user._id === userId
+	let isWhoLoggedIn = false
+
+	if (state.user) {
+		isWhoLoggedIn = state.user._id === userId
+	}
 
 	return error ? (
 		<Redirect to='/notfound' />
@@ -79,8 +84,15 @@ const Profile = ({ match }) => {
 							</>
 						) : (
 							<>
-								<Link to='/edit/profile'>Edit Profile</Link>
-								<p>More</p>
+								<div className='editProfileBtn'>
+									<Link to='/edit/profile' className='editProfile'>
+										Edit Profile
+									</Link>
+								</div>
+
+								<div className='settings'>
+									<img src={settingsIcon} alt='edit_profile' />
+								</div>
 							</>
 						)}
 					</div>
