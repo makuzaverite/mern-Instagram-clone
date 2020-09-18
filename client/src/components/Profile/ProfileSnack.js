@@ -11,7 +11,7 @@ function ProfileSnack() {
 	const { profileState } = useContext(ProfileContext)
 	const { user } = state
 
-	return state.isLoading ? (
+	return !state.user ? (
 		<Spinner />
 	) : (
 		<div className='snackBar'>

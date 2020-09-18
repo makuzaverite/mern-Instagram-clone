@@ -41,6 +41,7 @@ function Login() {
 					type: auth_actions.LOGIN_SUCCESS,
 					payload: { data: getMe.data, token },
 				})
+
 				history.push('/')
 			} catch (error) {
 				setError('Somethinng went wrong try again')

@@ -4,8 +4,9 @@ export const AuthReducer = (state, action) => {
 	switch (action.type) {
 		case auth_actions.LOGIN_SUCCESS:
 			return {
+				...state,
 				token: action.payload.token,
-				user: action.payload.data,
+				user: action.payload.data.data,
 				isAuthenticated: true,
 				isLoading: false,
 			}
