@@ -75,6 +75,7 @@ exports.findProfile = asyncHandler(async (req, res, next) => {
 })
 
 exports.updateProfile = asyncHandler(async (req, res) => {
+	console.log('reacted')
 	const checkProfile = await Profile.findById(req.params.id)
 
 	if (!checkProfile) {

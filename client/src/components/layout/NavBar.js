@@ -1,30 +1,20 @@
 import React, { useContext, useState } from 'react'
 import './NavBar.css'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { AuthContext } from '../../context/AuthContext'
-import { ProfileContext } from '../../context/ProfileContext'
 import Avatar from '../../assets/images/avatar.png'
 import HomeIcon from '../../assets/icons/home.svg'
 import ShareIcon from '../../assets/icons/share.svg'
 import ExploreIcon from '../../assets/icons/explore.svg'
 import LikeIcon from '../../assets/icons/like.svg'
 import AddPostIcon from '../../assets/icons/add_box.svg'
-import { auth_actions } from '../../actionsTypes/action_types'
-import { profile_types } from '../../actionsTypes/profile_types'
 import AddNewPost from '../modals/AddNewPost'
+import ProfileAvatarDropDown from '../modals/ProfileAvatarDropDown'
 
 export default function NavBar() {
-	const { state, dispatch } = useContext(AuthContext)
-	const { profileState, profileDispatch } = useContext(ProfileContext)
+	const { state } = useContext(AuthContext)
 	const [isOpen, setisOpen] = useState(false)
-
-	const history = useHistory()
-	const logout = () => {
-		localStorage.setItem('auth-token', '')
-		dispatch({ type: auth_actions.LOGOUT })
-		profileDispatch({ type: profile_types.LOGOUT })
-		history.push('/login')
-	}
+	const [openDropDown, setOpenDropDown] = useState(false)
 
 	if (state.isLoading) {
 		return null
@@ -97,14 +87,18 @@ export default function NavBar() {
 								/>
 							</Link>
 						</li>
+
 						<li>
-							<Link to={`/${profileState.username}`}>
+							<Link
+								to='#'
+								onClick={() => setOpenDropDown((openDropDown) => !openDropDown)}>
 								<img src={Avatar} alt='Avatar' align='center' tooltip='profile' />
 							</Link>
 						</li>
-						<li onClick={logout} style={{ cursor: 'pointer' }}>
-							Logout
-						</li>
+						<ProfileAvatarDropDown
+							onClose={() => setOpenDropDown(false)}
+							isOpen={openDropDown}
+						/>
 					</ul>
 				) : (
 					<ul>
