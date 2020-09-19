@@ -5,11 +5,13 @@ import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import { ProfileContext } from '../../context/ProfileContext'
 import { profile_types } from '../../actionsTypes/profile_types'
+import AvatarIcon from '../../assets/images/avatar.png'
 
 function EditProfile() {
 	const history = useHistory()
 	const { profileState, profileDispatch } = useContext(ProfileContext)
-
+	const uploadedImage = createRef(null)
+	const imageUploader = createRef(null)
 	const website = createRef()
 	const bio = createRef()
 	const location = createRef()
@@ -18,6 +20,16 @@ function EditProfile() {
 	const [gender, setGender] = useState(profileState.gender)
 
 	const profileID = profileState.id
+
+	const handleChangeImage = (e) => {
+		const file = e.target.files[0]
+		if (file) {
+			Object.assign(file, {
+				preview: URL.createObjectURL(file),
+			})
+			uploadedImage.current.src = file.preview
+		}
+	}
 
 	const handleEdit = async (e) => {
 		e.preventDefault()
@@ -56,9 +68,48 @@ function EditProfile() {
 	) : (
 		<div className='edit-profile'>
 			<form onSubmit={handleEdit}>
-				<div className='form-control'>
-					<input type='hidden' id='profilePic' />
+				<div
+					style={{
+						display: 'flex',
+						flexFlow: 'column nowrap',
+						alignItems: 'center',
+						justifyContent: 'center',
+					}}>
+					<input
+						type='file'
+						accept='image/*'
+						multiple={false}
+						src={AvatarIcon}
+						onChange={handleChangeImage}
+						ref={imageUploader}
+						style={{
+							display: 'none',
+						}}
+					/>
+					<div
+						style={{
+							width: '70px',
+							height: '70px',
+						}}
+						onClick={() => imageUploader.current.click()}>
+						<img
+							ref={uploadedImage}
+							src={AvatarIcon}
+							alt='image_upload'
+							style={{
+								height: '80px',
+								width: '80px',
+								position: 'absolute',
+								borderRadius: '50%',
+							}}
+						/>
+					</div>
 				</div>
+
+				{/* <div className='avatar-placeholder'>
+					<img src={AvatarIcon} alt='image_avatar_here' />
+					<input type='file' name='profile_image' id='profile_image' multiple='false' />
+				</div> */}
 
 				<div className='form-control'>
 					<label htmlFor='username'>Username</label>

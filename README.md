@@ -13,7 +13,7 @@
 - Adding a comment to a post
 - Delete a post
 
-### How use use it on your machine
+### How to run it on local environment
 
 ```git
   git clone https://github.com/makuzaverite/iDrip.git

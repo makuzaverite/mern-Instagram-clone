@@ -8,7 +8,7 @@ import { ProfileContext } from '../../context/ProfileContext'
 import './ProfileAvatarDropDown.css'
 import profileIcon from '../../assets/icons/profile.svg'
 import settingsIcon from '../../assets/icons/settings.svg'
-import logoutIcon from '../../assets/icons/profile.svg'
+// import logoutIcon from '../../assets/icons/profile.svg'
 
 function ProfileAvatarDropDown({ isOpen, onClose }) {
 	const { profileState, profileDispatch } = useContext(ProfileContext)

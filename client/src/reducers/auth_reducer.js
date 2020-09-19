@@ -6,12 +6,20 @@ export const AuthReducer = (state, action) => {
 			return {
 				...state,
 				token: action.payload.token,
-				user: action.payload.data.data,
+				user: {
+					...state.user,
+					email: action.payload.data.email,
+					firstname: action.payload.data.firstname,
+					lastname: action.payload.data.lastname,
+					password: action.payload.data.password,
+					_id: action.payload.data._id,
+				},
 				isAuthenticated: true,
 				isLoading: false,
 			}
 		case auth_actions.LOGIN_FAILURE:
 			return {
+				...state,
 				token: '',
 				user: '',
 				isAuthenticated: false,
@@ -20,6 +28,7 @@ export const AuthReducer = (state, action) => {
 
 		case auth_actions.LOGOUT:
 			return {
+				...state,
 				token: undefined,
 				user: undefined,
 				isAuthenticated: false,

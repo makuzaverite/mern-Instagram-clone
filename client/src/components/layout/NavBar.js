@@ -9,96 +9,96 @@ import LikeIcon from '../../assets/icons/like.svg'
 import AddPostIcon from '../../assets/icons/add_box.svg'
 import AddNewPost from '../modals/AddNewPost'
 import ProfileAvatarDropDown from '../modals/ProfileAvatarDropDown'
+import Spinner from './Spinner'
 
 export default function NavBar() {
 	const { state } = useContext(AuthContext)
 	const [isOpen, setisOpen] = useState(false)
 	const [openDropDown, setOpenDropDown] = useState(false)
 
-	if (state.isLoading) {
-		return null
-	} else {
-		return (
-			<nav>
-				<span>
-					<Link to='/' className='app_name'>
-						iDrip
-					</Link>
-				</span>
-				{state.user ? (
-					<ul>
-						<li>
-							<Link to='/'>
-								<img
-									src={HomeIcon}
-									alt='Avatar'
-									align='center'
-									tooltip='profile'
-									height='100px'
-								/>
-							</Link>
-						</li>
+	console.log(state)
 
-						<li>
-							<AddNewPost isopen={isOpen} onClose={() => setisOpen(false)} />
-							<Link to='/' onClick={() => setisOpen(true)}>
-								<img
-									src={AddPostIcon}
-									alt='Avatar'
-									align='center'
-									tooltip='profile'
-									height='100px'
-								/>
-							</Link>
-						</li>
+	if (state.isLoading) return <Spinner />
+	return (
+		<nav>
+			<span>
+				<Link to='/' className='app_name'>
+					iDrip
+				</Link>
+			</span>
+			{state.user ? (
+				<ul>
+					<li>
+						<Link to='/'>
+							<img
+								src={HomeIcon}
+								alt='Avatar'
+								align='center'
+								tooltip='profile'
+								height='100px'
+							/>
+						</Link>
+					</li>
 
-						<li>
-							<Link to='/'>
-								<img
-									src={ExploreIcon}
-									alt='Avatar'
-									align='center'
-									tooltip='profile'
-									height='100px'
-								/>
-							</Link>
-						</li>
+					<li>
+						<AddNewPost isopen={isOpen} onClose={() => setisOpen(false)} />
+						<Link to='/' onClick={() => setisOpen(true)}>
+							<img
+								src={AddPostIcon}
+								alt='Avatar'
+								align='center'
+								tooltip='profile'
+								height='100px'
+							/>
+						</Link>
+					</li>
 
-						<li>
-							<Link to='/'>
-								<img
-									src={LikeIcon}
-									alt='Avatar'
-									align='center'
-									tooltip='profile'
-									height='100px'
-								/>
-							</Link>
-						</li>
+					<li>
+						<Link to='/'>
+							<img
+								src={ExploreIcon}
+								alt='Avatar'
+								align='center'
+								tooltip='profile'
+								height='100px'
+							/>
+						</Link>
+					</li>
 
-						<li>
-							<Link
-								to='#'
-								onClick={() => setOpenDropDown((openDropDown) => !openDropDown)}>
-								<img src={Avatar} alt='Avatar' align='center' tooltip='profile' />
-							</Link>
-						</li>
-						<ProfileAvatarDropDown
-							onClose={() => setOpenDropDown(false)}
-							isOpen={openDropDown}
-						/>
-					</ul>
-				) : (
-					<ul>
-						<li>
-							<Link to='/login'>Login</Link>
-						</li>
-						<li>
-							<Link to='/register'>Register</Link>
-						</li>
-					</ul>
-				)}
-			</nav>
-		)
-	}
+					<li>
+						<Link to='/'>
+							<img
+								src={LikeIcon}
+								alt='Avatar'
+								align='center'
+								tooltip='profile'
+								height='100px'
+							/>
+						</Link>
+					</li>
+
+					<li>
+						<Link
+							to='#'
+							onClick={() => setOpenDropDown((openDropDown) => !openDropDown)}>
+							<img src={Avatar} alt='Avatar' align='center' tooltip='profile' />
+						</Link>
+					</li>
+					<ProfileAvatarDropDown
+						onClose={() => setOpenDropDown(false)}
+						isOpen={openDropDown}
+					/>
+				</ul>
+			) : (
+				<ul>
+					<li>
+						<Link to='/login'>Login</Link>
+					</li>
+					<li>
+						<Link to='/register'>Register</Link>
+					</li>
+				</ul>
+			)}
+		</nav>
+	)
 }

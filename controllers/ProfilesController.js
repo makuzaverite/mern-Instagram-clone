@@ -75,10 +75,47 @@ exports.findProfile = asyncHandler(async (req, res, next) => {
 })
 
 exports.updateProfile = asyncHandler(async (req, res) => {
-	const checkProfile = await Profile.findById(req.params.id)
+	if (req.files) {
+		console.log(req.body, req.files)
+		const file = req.files.file
 
-	if (!checkProfile) {
-		return next(new ErrorResponse('No profile found', 400))
+		//Make sure file is a photo
+		if (!file.mimetype.startsWith('image')) {
+			return next(new ErrorResponse(`Please upload an image file`, 400))
+		}
+
+		if (file.size > process.env.FILE_UPLOAD_SIZE) {
+			return next(
+				new ErrorResponse(
+					`Please upload an image less than ${process.env.FILE_UPLOAD_SIZE}`,
+					400
+				)
+			)
+		}
+
+		//create custom filenane
+		file.name = `photo_${profile._id}${path.parse(file.name).ext}`
+
+		file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async (err) => {
+			if (err) {
+				return next(new ErrorResponse(`Problem occured while uploading file`, 500))
+			}
+
+			const fieldsToupdate = {
+				user: req.user.id,
+				username: req.body.username,
+				website: req.body.website,
+				location: req.body.location,
+				gender: req.body.gender,
+				bio: req.body.bio,
+				profilePhotos: file.name,
+			}
+
+			const updatedUser = await Profile.findByIdAndUpdate(req.params.id, fieldsToupdate, {
+				runValidators: true,
+			})
+			res.status(201).json({ success: true, data: updatedUser })
+		})
 	}
 
 	const fieldsToupdate = {
@@ -89,9 +126,9 @@ exports.updateProfile = asyncHandler(async (req, res) => {
 		gender: req.body.gender,
 		bio: req.body.bio,
 	}
+
 	const user = await Profile.findByIdAndUpdate(req.params.id, fieldsToupdate, {
 		runValidators: true,
-		new: true,
 	})
 	res.status(201).json({ success: true, data: user })
 })
