@@ -16,8 +16,6 @@ export default function NavBar() {
 	const [isOpen, setisOpen] = useState(false)
 	const [openDropDown, setOpenDropDown] = useState(false)
 
-	console.log(state)
-
 	if (state.isLoading) return <Spinner />
 	return (
 		<nav>

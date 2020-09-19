@@ -33,18 +33,25 @@ function EditProfile() {
 
 	const handleEdit = async (e) => {
 		e.preventDefault()
+		let profile
 
-		const profile = {
-			username: username.current.value,
-			website: website.current.value,
-			bio: bio.current.value,
-			gender: gender,
-			location: location.current.value,
-		}
+		// profile = {
+		// 	username: username.current.value,
+		// 	website: website.current.value,
+		// 	bio: bio.current.value,
+		// 	gender: gender,
+		// 	location: location.current.value,
+		// }
+
+		profile = new FormData()
+		profile.append('profileImage', uploadedImage.current.src)
+		profile.append('username', username.current.value)
+		profile.append('website', website.current.value)
+		profile.append('bio', bio.current.value)
+		profile.append('gender', gender)
+		profile.append('location', location.current.value)
 
 		try {
-			console.log(profileID)
-
 			const res = await axios.put('/api/profile/' + profileID, profile, {
 				headers: {
 					'Content-Type': 'application/json',
@@ -63,7 +70,7 @@ function EditProfile() {
 		}
 	}
 
-	return Object.keys(profileState).length === 0 && profileState.constructor === Object ? (
+	return !profileState.username ? (
 		<Spinner />
 	) : (
 		<div className='edit-profile'>
@@ -106,11 +113,6 @@ function EditProfile() {
 					</div>
 				</div>
 
-				{/* <div className='avatar-placeholder'>
-					<img src={AvatarIcon} alt='image_avatar_here' />
-					<input type='file' name='profile_image' id='profile_image' multiple='false' />
-				</div> */}
-
 				<div className='form-control'>
 					<label htmlFor='username'>Username</label>
 					<input
@@ -142,8 +144,7 @@ function EditProfile() {
 						value='Male'
 						onChange={(e) => setGender(e.target.value)}
 					/>
-					{'   '}
-					Male <br />
+					{'   '} Male <br />
 					<input
 						defaultChecked={profileState.gender === 'Female'}
 						type='radio'

@@ -21,7 +21,14 @@ export const AuthReducer = (state, action) => {
 			return {
 				...state,
 				token: '',
-				user: '',
+				user: {
+					...state.user,
+					email: '',
+					firstname: '',
+					lastname: '',
+					password: '',
+					_id: '',
+				},
 				isAuthenticated: false,
 				isLoading: false,
 			}
@@ -30,7 +37,14 @@ export const AuthReducer = (state, action) => {
 			return {
 				...state,
 				token: undefined,
-				user: undefined,
+				user: {
+					...state.user,
+					email: '',
+					firstname: '',
+					lastname: '',
+					password: '',
+					_id: '',
+				},
 				isAuthenticated: false,
 				isLoading: false,
 			}

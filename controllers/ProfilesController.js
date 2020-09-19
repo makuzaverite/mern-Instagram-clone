@@ -75,6 +75,10 @@ exports.findProfile = asyncHandler(async (req, res, next) => {
 })
 
 exports.updateProfile = asyncHandler(async (req, res) => {
+	console.log(req.body)
+
+	return
+
 	if (req.files) {
 		console.log(req.body, req.files)
 		const file = req.files.file
