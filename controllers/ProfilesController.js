@@ -75,53 +75,6 @@ exports.findProfile = asyncHandler(async (req, res, next) => {
 })
 
 exports.updateProfile = asyncHandler(async (req, res) => {
-	console.log(req.body)
-
-	return
-
-	if (req.files) {
-		console.log(req.body, req.files)
-		const file = req.files.file
-
-		//Make sure file is a photo
-		if (!file.mimetype.startsWith('image')) {
-			return next(new ErrorResponse(`Please upload an image file`, 400))
-		}
-
-		if (file.size > process.env.FILE_UPLOAD_SIZE) {
-			return next(
-				new ErrorResponse(
-					`Please upload an image less than ${process.env.FILE_UPLOAD_SIZE}`,
-					400
-				)
-			)
-		}
-
-		//create custom filenane
-		file.name = `photo_${profile._id}${path.parse(file.name).ext}`
-
-		file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async (err) => {
-			if (err) {
-				return next(new ErrorResponse(`Problem occured while uploading file`, 500))
-			}
-
-			const fieldsToupdate = {
-				user: req.user.id,
-				username: req.body.username,
-				website: req.body.website,
-				location: req.body.location,
-				gender: req.body.gender,
-				bio: req.body.bio,
-				profilePhotos: file.name,
-			}
-
-			const updatedUser = await Profile.findByIdAndUpdate(req.params.id, fieldsToupdate, {
-				runValidators: true,
-			})
-			res.status(201).json({ success: true, data: updatedUser })
-		})
-	}
-
 	const fieldsToupdate = {
 		user: req.user.id,
 		username: req.body.username,
@@ -183,20 +136,26 @@ exports.unfollow = asyncHandler(async (req, res, next) => {
 })
 
 exports.updateProfilePicture = asyncHandler(async (req, res, next) => {
+
 	const profile = await Profile.findById(req.params.id)
+
 
 	if (!profile) {
 		return next(new ErrorResponse(`No profile found`, 403))
 	}
 
+
 	if (!req.files) return next(new ErrorResponse(`Please upload a file`, 400))
 
+
 	const file = req.files.file
+
 
 	//Make sure file is a photo
 	if (!file.mimetype.startsWith('image')) {
 		return next(new ErrorResponse(`Please upload an image file`, 400))
 	}
+
 
 	if (file.size > process.env.FILE_UPLOAD_SIZE) {
 		return next(
@@ -210,7 +169,9 @@ exports.updateProfilePicture = asyncHandler(async (req, res, next) => {
 	//create custom filenane
 	file.name = `photo_${profile._id}${path.parse(file.name).ext}`
 
+
 	file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async (err) => {
+
 		if (err) {
 			return next(new ErrorResponse(`Problem occured while uploading file`, 500))
 		}

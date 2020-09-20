@@ -19,37 +19,53 @@ function EditProfile() {
 	const token = localStorage.getItem('auth-token')
 	const [gender, setGender] = useState(profileState.gender)
 
+
+
 	const profileID = profileState.id
 
-	const handleChangeImage = (e) => {
+
+	const handleChangeImage = async(e) => {
 		const file = e.target.files[0]
+
+		const formData = new FormData()
+		formData.append('file', file)
+
 		if (file) {
 			Object.assign(file, {
 				preview: URL.createObjectURL(file),
 			})
 			uploadedImage.current.src = file.preview
+
+			try {
+				const response = await axios.put('/api/profile/photo/'+profileID, formData, {
+					headers: {
+						'Content-Type': 'multipart/form-data',
+						Authorization: `Bearer ${token}`,
+					},
+				})
+				profileDispatch({
+					type:profile_types.EDIT_PROFILE_IMAGE,
+                    payload:response.data.data
+				})
+			} catch (error) {
+				console.log(error)
+			}
+
 		}
 	}
 
 	const handleEdit = async (e) => {
 		e.preventDefault()
-		let profile
 
-		// profile = {
-		// 	username: username.current.value,
-		// 	website: website.current.value,
-		// 	bio: bio.current.value,
-		// 	gender: gender,
-		// 	location: location.current.value,
-		// }
+		const profile = {
+			username: username.current.value,
+			website: website.current.value,
+			bio: bio.current.value,
+			gender: gender,
+			location: location.current.value,
+		}
 
-		profile = new FormData()
-		profile.append('profileImage', uploadedImage.current.src)
-		profile.append('username', username.current.value)
-		profile.append('website', website.current.value)
-		profile.append('bio', bio.current.value)
-		profile.append('gender', gender)
-		profile.append('location', location.current.value)
+
 
 		try {
 			const res = await axios.put('/api/profile/' + profileID, profile, {
@@ -101,7 +117,7 @@ function EditProfile() {
 						onClick={() => imageUploader.current.click()}>
 						<img
 							ref={uploadedImage}
-							src={AvatarIcon}
+							src={AvatarIcon && profileState.profilePhotos}
 							alt='image_upload'
 							style={{
 								height: '80px',

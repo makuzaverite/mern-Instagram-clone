@@ -28,6 +28,12 @@ export const ProfileReducer = (state, action) => {
 				user: action.payload.user,
 				id: action.payload._id,
 			}
+
+		case profile_types.EDIT_PROFILE_IMAGE:
+			return {
+				...state,
+				profilePhotos:action.payload
+			}
 		case profile_types.LOGOUT:
 			return {}
 		default:
