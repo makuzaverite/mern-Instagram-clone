@@ -8,7 +8,6 @@ import { ProfileContext } from '../../context/ProfileContext'
 import './ProfileAvatarDropDown.css'
 import profileIcon from '../../assets/icons/profile.svg'
 import settingsIcon from '../../assets/icons/settings.svg'
-// import logoutIcon from '../../assets/icons/profile.svg'
 
 function ProfileAvatarDropDown({ isOpen, onClose }) {
 	const { profileState, profileDispatch } = useContext(ProfileContext)
@@ -31,15 +30,14 @@ function ProfileAvatarDropDown({ isOpen, onClose }) {
 				<div className='modal-container'>
 					<ul>
 						<li>
-							<img src={profileIcon} alt='profile_icon' />
 							<Link to={`/${profileState.username}`} onClick={onClose}>
-								{' '}
+							<img src={profileIcon} alt='profile_icon' />
 								Profile
 							</Link>
 						</li>
 						<li>
-							<img src={settingsIcon} alt='settings_icon' />
 							<Link to='/edit/profile' onClick={onClose}>
+					          <img src={settingsIcon} alt='settings_icon' />
 								Settings
 							</Link>
 						</li>

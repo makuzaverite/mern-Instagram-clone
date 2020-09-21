@@ -80,6 +80,9 @@ function PostItem(props) {
 					<div className='post_footer_icons'>
 						<div>
 							<motion.img
+							  style={{
+								  width:'20px'
+							  }}
 								whileHover={{
 									scale: 1.2,
 									transition: { duration: 1 },

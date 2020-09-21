@@ -44,9 +44,8 @@ function EditProfile() {
                     payload:response.data.data
 				})
 
-				console.log(response)
 			} catch (error) {
-				console.log(error)
+				console.error(error)
 			}
 
 		}
@@ -62,9 +61,6 @@ function EditProfile() {
 			gender: gender,
 			location: location.current.value,
 		}
-
-
-
 		try {
 			const res = await axios.put('/api/profile/' + profileID, profile, {
 				headers: {
@@ -100,7 +96,6 @@ function EditProfile() {
 						type='file'
 						accept='image/*'
 						multiple={false}
-						src={AvatarIcon}
 						onChange={handleChangeImage}
 						ref={imageUploader}
 						style={{
@@ -115,7 +110,7 @@ function EditProfile() {
 						onClick={() => imageUploader.current.click()}>
 						<img
 							ref={uploadedImage}
-							src={profileState.profilePhotos}
+							src={profileState.profilePhotos === 'no-photo.jpg' ? AvatarIcon : profileState.profilePhotos}
 							alt='image_upload'
 							style={{
 								height: '80px',
@@ -190,7 +185,7 @@ function EditProfile() {
 						placeholder='location'
 					/>
 				</div>
-				<button type='submit'>Edit Profile</button>
+				<button type='submit'>Save changes</button>
 			</form>
 		</div>
 	)

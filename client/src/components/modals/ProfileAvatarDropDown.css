@@ -17,6 +17,11 @@
 	position: relative;
 }
 
+.modal-container li a{
+	display: flex;
+	align-items: center;
+}
+
 .modal-container::before {
 	content: '';
 	position: absolute;
