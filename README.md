@@ -4,19 +4,19 @@
 
 #### what is does
 
-- Loggin user
-- Registering user
-- Adding post
-- Deleting a post
-- Edit profile
-- Liking a post
-- Adding a comment to a post
-- Delete a post
+- [x] Loggin user
+- [x] Registering user
+- [x] Adding post
+- [x] Deleting a post
+- [x] Edit profile
+- [x] Liking a post
+- [x] Adding a comment to a post
+- [x] Delete a post
 
 ### How to run it on local environment
 
 ```git
-  git clone https://github.com/makuzaverite/iDrip.git
+  git clone https://github.com/makuzaverite/mern-Instagram-clone.git
 
   cd iDrip
 
