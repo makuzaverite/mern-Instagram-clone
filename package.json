@@ -25,5 +25,8 @@
     "morgan": "^1.10.0",
     "nodemon": "^2.0.4",
     "react-dropzone": "^11.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.9.0"
   }
 }

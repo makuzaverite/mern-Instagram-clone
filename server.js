@@ -2,6 +2,7 @@ const path = require('path')
 const express = require('express')
 const dotenv = require('dotenv')
 const errorHandler = require('./middleware/error')
+// eslint-disable-next-line no-unused-vars
 const colors = require('colors')
 const morgan = require('morgan')
 const fileupload = require('express-fileupload')
@@ -56,7 +57,7 @@ const server = app.listen(PORT, () =>
 )
 
 //Handled promise rejection
-process.on('unhandledRejection', (error, promise) => {
+process.on('unhandledRejection', (error) => {
     console.log(`Error: ${error.message}`.red)
     server.close(() => process.exit(1))
 })
