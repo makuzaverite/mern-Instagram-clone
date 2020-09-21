@@ -167,7 +167,9 @@ exports.updateProfilePicture = asyncHandler(async (req, res, next) => {
 	}
 
 	//create custom filenane
-	file.name = `photo_${profile._id}${path.parse(file.name).ext}`
+   file.name = `post_${new Date().getUTCMilliseconds() + 1000}_${req.user.id}${
+		path.parse(file.name).ext
+	}`
 
 
 	file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async (err) => {
@@ -176,10 +178,14 @@ exports.updateProfilePicture = asyncHandler(async (req, res, next) => {
 			return next(new ErrorResponse(`Problem occured while uploading file`, 500))
 		}
 
-		await Profile.findByIdAndUpdate(req.params.id, { profilePhotos: file.name })
+		const url = req.protocol + '://' + req.get('host')
+		const filename = `${url}/public/uploads/${file.name}`
+
+		await Profile.findByIdAndUpdate(req.params.id, { profilePhotos:filename})
+
 		res.status(200).json({
 			success: true,
-			data: file.name,
+			data: filename,
 		})
 	})
 })

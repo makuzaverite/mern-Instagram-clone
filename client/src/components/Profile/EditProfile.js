@@ -31,10 +31,6 @@ function EditProfile() {
 		formData.append('file', file)
 
 		if (file) {
-			Object.assign(file, {
-				preview: URL.createObjectURL(file),
-			})
-			uploadedImage.current.src = file.preview
 
 			try {
 				const response = await axios.put('/api/profile/photo/'+profileID, formData, {
@@ -47,6 +43,8 @@ function EditProfile() {
 					type:profile_types.EDIT_PROFILE_IMAGE,
                     payload:response.data.data
 				})
+
+				console.log(response)
 			} catch (error) {
 				console.log(error)
 			}
@@ -117,7 +115,7 @@ function EditProfile() {
 						onClick={() => imageUploader.current.click()}>
 						<img
 							ref={uploadedImage}
-							src={AvatarIcon && profileState.profilePhotos}
+							src={profileState.profilePhotos}
 							alt='image_upload'
 							style={{
 								height: '80px',

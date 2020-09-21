@@ -68,7 +68,7 @@ const Profile = ({ match }) => {
 		<section className='profile-page'>
 			<div className='profiler__card'>
 				<div className='profile_avatar'>
-					<img src={profilePhoto && Avatar} alt='profile' />
+					<img src={profilePhoto ? profilePhoto : Avatar} alt='profile' />
 				</div>
 
 				<div className='intro_to_user'>

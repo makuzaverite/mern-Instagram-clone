@@ -10,11 +10,15 @@ import AddPostIcon from '../../assets/icons/add_box.svg'
 import AddNewPost from '../modals/AddNewPost'
 import ProfileAvatarDropDown from '../modals/ProfileAvatarDropDown'
 import Spinner from './Spinner'
+import { ProfileContext } from '../../context/ProfileContext'
 
 export default function NavBar() {
 	const { state } = useContext(AuthContext)
+	const {profileState} = useContext(ProfileContext)
 	const [isOpen, setisOpen] = useState(false)
 	const [openDropDown, setOpenDropDown] = useState(false)
+
+
 
 	if (state.isLoading) return <Spinner />
 	return (
@@ -79,7 +83,7 @@ export default function NavBar() {
 						<Link
 							to='#'
 							onClick={() => setOpenDropDown((openDropDown) => !openDropDown)}>
-							<img src={Avatar} alt='Avatar' align='center' tooltip='profile' />
+							<img src={profileState.profilePhotos ? profileState.profilePhotos : Avatar} alt='Avatar' style={{borderRadius:'50%'}} align='center' tooltip='profile' />
 						</Link>
 					</li>
 					<ProfileAvatarDropDown

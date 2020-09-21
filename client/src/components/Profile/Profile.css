@@ -25,6 +25,7 @@
 .profile_avatar img {
 	width: 150px;
 	height: 143px;
+	border-radius: 50%;
 }
 
 .follow > * {

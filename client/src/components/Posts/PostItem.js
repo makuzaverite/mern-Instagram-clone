@@ -21,6 +21,7 @@ function PostItem(props) {
 	const { postPhoto, username, user, _id, likes, comments, caption } = props.post
 	const token = localStorage.getItem('auth-token')
 
+
 	const [ispostDetailsOpen, setIsPostDetailsOpen] = useState(false)
 
 	function HasLiked() {

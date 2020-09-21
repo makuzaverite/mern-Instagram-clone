@@ -15,7 +15,7 @@ function ProfileSnack() {
 		<Spinner />
 	) : (
 		<div className='snackBar'>
-			<img src={avatar} alt='avatar' />
+			<img src={ profileState.profilePhotos ? profileState.profilePhotos : avatar} alt='avatar' />
 			<div>
 				<Link to={`/${profileState.username}`} className='snackProfileName'>
 					{profileState.username}
