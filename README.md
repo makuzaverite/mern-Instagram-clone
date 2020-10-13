@@ -18,7 +18,7 @@
 ```git
   git clone https://github.com/makuzaverite/mern-Instagram-clone.git
 
-  cd iDrip
+  cd mern-Instagram-clone
 
   npm install
 
