@@ -1,8 +1,17 @@
 FROM node:latest
-WORKDIR /app
-COPY . .
-RUN npm ci && npm run build
 
-# you could totally use nginx:1.17-alpine here too
-FROM nginx:1.17
-COPY --from=0 /app/build /usr/share/nginx/html
+RUN npm i -g nodemon
+
+USER node
+
+RUN mkdir /home/node/code
+
+WORKDIR /home/node/code
+
+COPY --chown=node:node package-lock.json package.json ./
+
+RUN npm ci
+
+COPY --chown=node:node . .
+
+CMD ["nodemon", "server.js"]
