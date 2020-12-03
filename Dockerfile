@@ -9,9 +9,12 @@ RUN mkdir /home/node/code
 WORKDIR /home/node/code
 
 COPY --chown=node:node package.json ./
+COPY --chown=node:node package-lock.json ./
 
-RUN npm i
+RUN npm ci
 
 COPY --chown=node:node . .
+
+EXPOSE 3000
 
 CMD ["nodemon", "server.js"]

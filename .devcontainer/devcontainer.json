@@ -1,6 +1,6 @@
 {
     "name": "Instgram",
-    "dockerFile": "../Dockerfile",
+    "dockerFile": "./Dockerfile",
     "dockerComposeFile": "../docker-compose.yml",
     "shutdownAction": "stopContainer",
     "appPort": [
