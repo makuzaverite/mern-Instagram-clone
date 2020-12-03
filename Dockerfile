@@ -8,9 +8,9 @@ RUN mkdir /home/node/code
 
 WORKDIR /home/node/code
 
-COPY --chown=node:node package-lock.json package.json ./
+COPY --chown=node:node package.json ./
 
-RUN npm ci
+RUN npm i
 
 COPY --chown=node:node . .
 
