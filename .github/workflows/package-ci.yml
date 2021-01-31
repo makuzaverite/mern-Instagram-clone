@@ -15,14 +15,6 @@ jobs:
           working-directory: server
           useLockFile: false
 
-      - name: client
-        run: npm i
-        working-directory: client
-      - name: server
-        run: npm i
-        working-directory: server
-
-
   automerge:
     needs: build
     runs-on: ubuntu-latest
