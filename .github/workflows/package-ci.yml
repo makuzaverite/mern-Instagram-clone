@@ -10,9 +10,11 @@ jobs:
       - uses: bahmutov/npm-install@v1
         with:
           working-directory: client
+          useLockFile: false
       - uses: bahmutov/npm-install@v1
         with:
           working-directory: server
+          useLockFile: false
 
   automerge:
     needs: build
