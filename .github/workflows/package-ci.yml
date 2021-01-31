@@ -16,10 +16,10 @@ jobs:
           useLockFile: false
 
       - name: client
-        run: npm ci
+        run: npm i
         working-directory: client
       - name: server
-        run: npm ci
+        run: npm i
         working-directory: server
 
 
