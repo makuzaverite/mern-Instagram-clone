@@ -21,7 +21,7 @@
     "express": "^4.17.1",
     "express-fileupload": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.10.5",
+    "mongoose": "^5.11.14",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.4",
     "react-dropzone": "^11.1.0"
