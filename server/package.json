@@ -24,7 +24,7 @@
     "mongoose": "^5.11.14",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.4",
-    "react-dropzone": "^11.1.0"
+    "react-dropzone": "^11.2.4"
   },
   "devDependencies": {
     "eslint": "^7.19.0",
